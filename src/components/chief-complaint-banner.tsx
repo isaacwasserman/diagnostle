@@ -2,9 +2,17 @@ import { Stethoscope } from "lucide-react";
 
 interface Props {
   complaint: string;
+  dateStr: string;
 }
 
-export function ChiefComplaintBanner({ complaint }: Props) {
+export function ChiefComplaintBanner({ complaint, dateStr }: Props) {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  const displayDate = new Date(y!, m! - 1, d!).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
   return (
     <div className="rounded-2xl bg-primary px-5 py-4">
       <div className="flex items-center justify-between mb-3">
@@ -12,11 +20,7 @@ export function ChiefComplaintBanner({ complaint }: Props) {
           Chief Complaint
         </p>
         <p className="text-[11px] font-medium text-primary-foreground/50">
-          {new Date().toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-          })}
+          {displayDate}
         </p>
       </div>
       <div className="flex items-start gap-3">
