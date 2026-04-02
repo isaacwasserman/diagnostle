@@ -27,7 +27,7 @@ export const diseases: DiseaseDef[] = [
     keywords: ["copd", "emphysema", "chronic bronchitis", "smoking"],
     patterns: [obstructiveAirway],
     overrides: {
-      haemoglobin: { direction: "high", range: [17.5, 20] },
+      hemoglobin: { direction: "high", range: [17.5, 20] },
     },
   },
   {
@@ -89,7 +89,7 @@ export const diseases: DiseaseDef[] = [
   {
     id: "lung_cancer",
     name: "Lung cancer",
-    chiefComplaints: ["persistent cough", "haemoptysis", "weight loss", "shortness of breath"],
+    chiefComplaints: ["persistent cough", "hemoptysis", "weight loss", "shortness of breath"],
     organSystem: "respiratory",
     severity: "severe",
     keywords: ["lung cancer", "bronchogenic carcinoma", "lung mass"],

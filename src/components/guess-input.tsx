@@ -22,7 +22,7 @@ const organSystemLabels: Record<string, string> = {
   cardiovascular: "Cardiovascular",
   endocrine: "Endocrine & Metabolic",
   gastrointestinal: "Gastrointestinal",
-  haematological: "Haematological",
+  hematological: "Hematological",
   infectious: "Infectious",
   musculoskeletal: "Musculoskeletal",
   neurological: "Neurological",

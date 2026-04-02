@@ -36,7 +36,7 @@ export const diseases: DiseaseDef[] = [
       temperature: { direction: "high", range: [37.5, 38.5] },
       chest_xray: { value: "Upper lobe cavitation with fibrosis" },
       wbc: { direction: "high", range: [11, 18] },
-      haemoglobin: { direction: "low", range: [9, 12] },
+      hemoglobin: { direction: "low", range: [9, 12] },
     },
   },
   {
@@ -76,7 +76,7 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["fever with confusion", "feeling very unwell", "rapid breathing"],
     organSystem: "infectious",
     severity: "critical",
-    keywords: ["sepsis", "septicaemia", "blood poisoning"],
+    keywords: ["sepsis", "septicemia", "blood poisoning"],
     patterns: [severeInfection],
     overrides: {
       creatinine: { direction: "high", range: [1.5, 4.0] },
@@ -96,7 +96,7 @@ export const diseases: DiseaseDef[] = [
     patterns: [acuteInflammation],
     overrides: {
       temperature: { direction: "high", range: [39, 41] },
-      haemoglobin: { direction: "low", range: [6, 10] },
+      hemoglobin: { direction: "low", range: [6, 10] },
       platelets: { direction: "low", range: [30, 100] },
       bilirubin: { direction: "high", range: [2, 8] },
       blood_cultures: { value: "Plasmodium parasites identified on thick/thin blood film" },
@@ -129,7 +129,7 @@ export const diseases: DiseaseDef[] = [
     patterns: [chronicInflammation],
     overrides: {
       wbc: { direction: "low", range: [2, 4] },
-      haemoglobin: { direction: "low", range: [8, 11] },
+      hemoglobin: { direction: "low", range: [8, 11] },
       platelets: { direction: "low", range: [80, 140] },
     },
   },
@@ -189,7 +189,7 @@ export const diseases: DiseaseDef[] = [
   {
     id: "norovirus",
     name: "Norovirus",
-    chiefComplaints: ["sudden vomiting", "watery diarrhoea", "abdominal cramps"],
+    chiefComplaints: ["sudden vomiting", "watery diarrhea", "abdominal cramps"],
     organSystem: "infectious",
     severity: "mild",
     keywords: ["norovirus", "winter vomiting bug", "gastroenteritis"],
@@ -239,7 +239,7 @@ export const diseases: DiseaseDef[] = [
     keywords: ["cellulitis", "skin infection", "soft tissue infection"],
     patterns: [bacterialInfection],
     overrides: {
-      skin_exam: { value: "Erythematous, warm, oedematous area with poorly defined borders" },
+      skin_exam: { value: "Erythematous, warm, edematous area with poorly defined borders" },
     },
     remove: ["blood_cultures"],
   },
@@ -252,7 +252,7 @@ export const diseases: DiseaseDef[] = [
     keywords: ["impetigo", "school sores", "staph skin infection"],
     patterns: [acuteInflammation],
     overrides: {
-      skin_exam: { value: "Honey-coloured crusted lesions on erythematous base, perioral and perinasal" },
+      skin_exam: { value: "Honey-colored crusted lesions on erythematous base, perioral and perinasal" },
       temperature: { direction: "high", range: [37.2, 38] },
     },
     remove: ["esr"],
@@ -260,7 +260,7 @@ export const diseases: DiseaseDef[] = [
   {
     id: "clostridium_difficile",
     name: "Clostridium difficile",
-    chiefComplaints: ["watery diarrhoea", "abdominal pain", "fever after antibiotics"],
+    chiefComplaints: ["watery diarrhea", "abdominal pain", "fever after antibiotics"],
     organSystem: "infectious",
     severity: "moderate",
     keywords: ["c diff", "clostridium difficile", "cdiff", "pseudomembranous colitis"],
@@ -274,13 +274,13 @@ export const diseases: DiseaseDef[] = [
   {
     id: "ecoli_o157",
     name: "E. coli O157",
-    chiefComplaints: ["bloody diarrhoea", "severe abdominal cramps", "nausea"],
+    chiefComplaints: ["bloody diarrhea", "severe abdominal cramps", "nausea"],
     organSystem: "infectious",
     severity: "severe",
-    keywords: ["e coli", "ecoli o157", "haemolytic uraemic syndrome", "hus"],
+    keywords: ["e coli", "ecoli o157", "hemolytic uremic syndrome", "hus"],
     patterns: [bacterialInfection],
     overrides: {
-      haemoglobin: { direction: "low", range: [7, 10] },
+      hemoglobin: { direction: "low", range: [7, 10] },
       platelets: { direction: "low", range: [30, 100] },
       creatinine: { direction: "high", range: [2.0, 6.0] },
       bilirubin: { direction: "high", range: [2, 6] },
