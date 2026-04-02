@@ -7,9 +7,10 @@ import { GameOverDialog } from "./game-over-dialog";
 
 interface Props {
   diseases: readonly DiseaseProfile[];
+  dateStr: string;
 }
 
-export function GameBoard({ diseases }: Props) {
+export function GameBoard({ diseases, dateStr }: Props) {
   const {
     state,
     targetDisease,
@@ -17,13 +18,13 @@ export function GameBoard({ diseases }: Props) {
     allDiseases,
     handleOrderTest,
     handleGuess,
-  } = useGame(diseases);
+  } = useGame(diseases, dateStr);
 
   const gameOver = state.status !== "playing";
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-4 space-y-4">
-      <ChiefComplaintBanner complaint={state.chiefComplaint} />
+      <ChiefComplaintBanner complaint={state.chiefComplaint} dateStr={dateStr} />
 
       <div>
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">

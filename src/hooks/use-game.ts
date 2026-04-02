@@ -1,11 +1,10 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import type { GameState, DiseaseProfile } from "@/data/types";
 import { createGame, orderTest, makeGuess, getAvailableTests } from "@/game/engine";
-import { dateSeed, todayDateStr } from "@/game/daily";
+import { dateSeed } from "@/game/daily";
 import { MAX_TURNS } from "@/game/scoring";
 
-export function useGame(allDiseases: readonly DiseaseProfile[]) {
-  const dateStr = useMemo(() => todayDateStr(), []);
+export function useGame(allDiseases: readonly DiseaseProfile[], dateStr: string) {
   const seedNum = useMemo(() => dateSeed(dateStr), [dateStr]);
 
   const diseaseMap = useMemo(
@@ -16,6 +15,11 @@ export function useGame(allDiseases: readonly DiseaseProfile[]) {
   const [state, setState] = useState<GameState>(() =>
     createGame(dateStr, allDiseases)
   );
+
+  // Reset game when date changes
+  useEffect(() => {
+    setState(createGame(dateStr, allDiseases));
+  }, [dateStr, allDiseases]);
 
   const targetDisease = useMemo(
     () => diseaseMap.get(state.diseaseId)!,

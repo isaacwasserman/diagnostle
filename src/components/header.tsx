@@ -8,13 +8,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ArchivePicker } from "./archive-picker";
 
 type Theme = "light" | "dark" | "system";
 
 const iconButtonClass =
   "flex items-center justify-center size-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors";
 
-export function Header() {
+interface HeaderProps {
+  dateStr: string;
+  onDateChange: (dateStr: string) => void;
+}
+
+export function Header({ dateStr, onDateChange }: HeaderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") return "system";
     return (localStorage.getItem("theme") as Theme) ?? "system";
@@ -44,6 +50,7 @@ export function Header() {
         </h1>
       </div>
       <div className="flex items-center gap-1">
+        <ArchivePicker dateStr={dateStr} onDateChange={onDateChange} />
         <Dialog>
           <DialogTrigger asChild>
             <button className={iconButtonClass} aria-label="How to play">
