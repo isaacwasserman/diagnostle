@@ -4,7 +4,7 @@ import { diseaseRegistry } from "@/data/diseases";
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-background">
       <Header />
       <GameBoard diseases={diseaseRegistry} />
     </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { GameState, DiseaseProfile } from "@/data/types";
 import { getStarRating } from "@/game/scoring";
 import {
@@ -15,7 +16,8 @@ interface Props {
 }
 
 export function GameOverDialog({ state, targetDisease }: Props) {
-  const isOpen = state.status === "won" || state.status === "lost";
+  const [dismissed, setDismissed] = useState(false);
+  const isOpen = !dismissed && (state.status === "won" || state.status === "lost");
   const won = state.status === "won";
   const stars = won ? getStarRating(state.turns.length) : 0;
 
@@ -31,8 +33,8 @@ export function GameOverDialog({ state, targetDisease }: Props) {
   };
 
   return (
-    <Dialog open={isOpen}>
-      <DialogContent className="sm:max-w-md" onPointerDownOutside={(e) => e.preventDefault()}>
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) setDismissed(true); }}>
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className={won ? "text-green-700" : "text-red-700"}>
             {won ? "Correct Diagnosis!" : "Out of Turns"}

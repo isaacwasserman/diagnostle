@@ -10,14 +10,14 @@ interface Props {
 export function TurnHistory({ turns }: Props) {
   if (turns.length === 0) {
     return (
-      <div className="text-center py-8 text-slate-400 text-sm">
+      <div className="text-center py-8 text-muted-foreground text-sm">
         Run a test or make a guess to begin.
       </div>
     );
   }
 
   return (
-    <ScrollArea className="h-[400px] pr-2">
+    <ScrollArea className="h-[calc(100vh-20rem)] min-h-48 max-h-[600px] pr-2">
       <div className="space-y-2">
         {turns.map((turn, i) => (
           <div key={i}>

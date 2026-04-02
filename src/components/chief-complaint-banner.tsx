@@ -5,19 +5,19 @@ interface Props {
 
 export function ChiefComplaintBanner({ complaint, turnsRemaining }: Props) {
   return (
-    <div className="rounded-lg bg-teal-50 border border-teal-200 p-4 mb-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-xs font-medium text-teal-600 uppercase tracking-wide">
+    <div className="rounded-lg bg-primary/10 border border-primary/30 p-4">
+      <div className="flex items-center justify-between gap-4">
+        <div className="min-w-0">
+          <p className="text-xs font-medium text-primary uppercase tracking-wide">
             Chief Complaint
           </p>
-          <p className="text-lg font-semibold text-teal-900 mt-1">
-            "{complaint}"
+          <p className="text-base sm:text-lg font-semibold text-foreground mt-1">
+            &ldquo;{complaint}&rdquo;
           </p>
         </div>
-        <div className="text-right">
-          <p className="text-xs text-slate-500">Turns remaining</p>
-          <p className={`text-2xl font-bold ${turnsRemaining <= 2 ? "text-red-600" : "text-slate-700"}`}>
+        <div className="text-right shrink-0">
+          <p className="text-xs text-muted-foreground">Turns left</p>
+          <p className={`text-2xl font-bold ${turnsRemaining <= 2 ? "text-destructive" : "text-foreground"}`}>
             {turnsRemaining}
           </p>
         </div>
