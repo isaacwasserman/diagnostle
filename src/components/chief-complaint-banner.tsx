@@ -1,26 +1,31 @@
+import { Stethoscope } from "lucide-react";
+
 interface Props {
   complaint: string;
-  turnsRemaining: number;
 }
 
-export function ChiefComplaintBanner({ complaint, turnsRemaining }: Props) {
+export function ChiefComplaintBanner({ complaint }: Props) {
   return (
-    <div className="rounded-lg bg-primary/10 border border-primary/30 p-4">
-      <div className="flex items-center justify-between gap-4">
-        <div className="min-w-0">
-          <p className="text-xs font-medium text-primary uppercase tracking-wide">
-            Chief Complaint
-          </p>
-          <p className="text-base sm:text-lg font-semibold text-foreground mt-1">
-            &ldquo;{complaint}&rdquo;
-          </p>
+    <div className="rounded-2xl bg-primary px-5 py-4">
+      <div className="flex items-center justify-between mb-3">
+        <p className="text-[11px] font-semibold text-primary-foreground/70 uppercase tracking-widest">
+          Chief Complaint
+        </p>
+        <p className="text-[11px] font-medium text-primary-foreground/50">
+          {new Date().toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })}
+        </p>
+      </div>
+      <div className="flex items-start gap-3">
+        <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-white/20">
+          <Stethoscope className="size-4 text-primary-foreground" />
         </div>
-        <div className="text-right shrink-0">
-          <p className="text-xs text-muted-foreground">Turns left</p>
-          <p className={`text-2xl font-bold ${turnsRemaining <= 2 ? "text-destructive" : "text-foreground"}`}>
-            {turnsRemaining}
-          </p>
-        </div>
+        <p className="text-base sm:text-lg font-semibold text-primary-foreground mt-0.5 leading-snug">
+          &ldquo;{complaint}&rdquo;
+        </p>
       </div>
     </div>
   );

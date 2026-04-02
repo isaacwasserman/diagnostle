@@ -1,67 +1,101 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import type { GameState, DiseaseProfile } from "@/data/types";
-import { getStarRating } from "@/game/scoring";
+import {
+  getNarrowingSequence,
+  narrowingEmojiLine,
+  narrowingShareText,
+} from "@/game/narrowing";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 interface Props {
   state: GameState;
   targetDisease: DiseaseProfile;
+  allDiseases: readonly DiseaseProfile[];
 }
 
-export function GameOverDialog({ state, targetDisease }: Props) {
+export function GameOverDialog({ state, targetDisease, allDiseases }: Props) {
   const [dismissed, setDismissed] = useState(false);
-  const isOpen = !dismissed && (state.status === "won" || state.status === "lost");
+  const isOpen =
+    !dismissed && (state.status === "won" || state.status === "lost");
   const won = state.status === "won";
-  const stars = won ? getStarRating(state.turns.length) : 0;
 
-  const testCount = state.turns.filter((t) => t.type === "test").length;
-  const guessCount = state.turns.filter((t) => t.type === "guess").length;
+  const total = allDiseases.length;
+  const sequence = getNarrowingSequence(state.turns, allDiseases);
 
-  const shareText = won
-    ? `Diagnostle ${state.date}\nChief complaint: "${state.chiefComplaint}"\nDiagnosed in ${state.turns.length} turns (${testCount} tests, ${guessCount} guesses)\n${"⭐".repeat(stars)}`
-    : `Diagnostle ${state.date}\nChief complaint: "${state.chiefComplaint}"\nFailed to diagnose in ${state.turns.length} turns`;
+  const emojiLines = sequence.map((s) => narrowingEmojiLine(s, total));
+
+  const shareText = [
+    `Diagnostle — ${state.date}`,
+    won
+      ? `✅ Diagnosed in ${state.turns.length} turn${state.turns.length !== 1 ? "s" : ""}`
+      : `❌ Failed to diagnose`,
+    "",
+    narrowingShareText(state.turns, allDiseases),
+  ].join("\n");
 
   const handleShare = () => {
     navigator.clipboard.writeText(shareText);
+    toast.success("Copied to clipboard");
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) setDismissed(true); }}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className={won ? "text-green-700" : "text-red-700"}>
-            {won ? "Correct Diagnosis!" : "Out of Turns"}
+    <Dialog
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) setDismissed(true);
+      }}
+    >
+      <DialogContent className="sm:max-w-sm gap-0">
+        <DialogHeader className="pb-4">
+          <DialogTitle className="text-center text-lg">
+            {won ? "Diagnosis Complete" : "Out of Turns"}
           </DialogTitle>
-          <DialogDescription>
-            The answer was <strong className="text-foreground">{targetDisease.name}</strong>
-          </DialogDescription>
+          <p className="text-center text-sm text-muted-foreground">
+            {won ? (
+              <>
+                You identified
+                <br />
+                <strong className="text-foreground text-base">
+                  {targetDisease.name}
+                </strong>
+                <br />
+                in {state.turns.length} turn
+                {state.turns.length !== 1 ? "s" : ""}
+              </>
+            ) : (
+              <>
+                The answer was
+                <br />
+                <strong className="text-foreground text-base">
+                  {targetDisease.name}
+                </strong>
+              </>
+            )}
+          </p>
         </DialogHeader>
 
-        <div className="space-y-3 py-2">
-          {won && (
-            <div className="text-center">
-              <p className="text-3xl">{"⭐".repeat(stars)}</p>
-              <p className="text-sm text-muted-foreground mt-1">
-                {state.turns.length} turn{state.turns.length !== 1 ? "s" : ""} ({testCount} tests, {guessCount} guesses)
-              </p>
-            </div>
-          )}
+        <div className="border-t pt-4 space-y-3">
+          <p className="text-xs text-muted-foreground text-center">
+            Diseases ruled out of {total}
+          </p>
 
-          {!won && (
-            <p className="text-sm text-muted-foreground text-center">
-              Better luck tomorrow!
-            </p>
-          )}
+          <div className="flex justify-center">
+            <pre className="text-sm leading-loose whitespace-pre select-all">
+{emojiLines.join("\n")}
+            </pre>
+          </div>
+        </div>
 
+        <div className="pt-4">
           <Button className="w-full" onClick={handleShare}>
-            Copy Results to Clipboard
+            Copy Results
           </Button>
         </div>
       </DialogContent>

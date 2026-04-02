@@ -1,38 +1,43 @@
 import type { Turn } from "@/data/types";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { TestResultCard } from "./test-result-card";
 import { GuessResultCard } from "./guess-result-card";
 
 interface Props {
   turns: Turn[];
+  maxTurns: number;
 }
 
-export function TurnHistory({ turns }: Props) {
+export function TurnHistory({ turns, maxTurns }: Props) {
+  const remaining = maxTurns - turns.length;
+
   if (turns.length === 0) {
     return (
-      <div className="text-center py-8 text-muted-foreground text-sm">
-        Run a test or make a guess to begin.
-      </div>
+      <p className="text-center py-6 text-sm text-muted-foreground">
+        Run a test or guess a diagnosis to begin.
+      </p>
     );
   }
 
   return (
-    <ScrollArea className="h-[calc(100vh-20rem)] min-h-48 max-h-[600px] pr-2">
-      <div className="space-y-2">
-        {turns.map((turn, i) => (
-          <div key={i}>
-            {turn.type === "test" ? (
-              <TestResultCard result={turn.result} />
-            ) : (
-              <GuessResultCard
-                guess={turn.guess}
-                correct={turn.correct}
-                feedback={turn.feedback}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-    </ScrollArea>
+    <div className="space-y-2">
+      {turns.map((turn, i) => (
+        <div key={i}>
+          {turn.type === "test" ? (
+            <TestResultCard result={turn.result} />
+          ) : (
+            <GuessResultCard
+              guess={turn.guess}
+              correct={turn.correct}
+              feedback={turn.feedback}
+            />
+          )}
+        </div>
+      ))}
+      {remaining > 0 && (
+        <p className="text-center text-xs text-muted-foreground pt-1">
+          {remaining} {remaining === 1 ? "turn" : "turns"} remaining
+        </p>
+      )}
+    </div>
   );
 }

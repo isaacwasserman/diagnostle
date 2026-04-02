@@ -24,34 +24,29 @@ export function GameBoard({ diseases }: Props) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-4 space-y-4">
-      <ChiefComplaintBanner
-        complaint={state.chiefComplaint}
-        turnsRemaining={turnsRemaining}
-      />
+      <ChiefComplaintBanner complaint={state.chiefComplaint} />
 
-      <div className="flex flex-col gap-4 lg:flex-row">
-        <div className="lg:w-1/2">
-          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-            Actions
-          </h2>
-          <ActionPanel
-            availableTests={availableTests}
-            diseases={allDiseases}
-            onSelectTest={handleOrderTest}
-            onGuess={handleGuess}
-            disabled={gameOver}
-          />
-        </div>
-
-        <div className="lg:w-1/2">
-          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-            History
-          </h2>
-          <TurnHistory turns={state.turns} />
-        </div>
+      <div>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
+          History
+        </h2>
+        <TurnHistory turns={state.turns} maxTurns={state.maxTurns} />
       </div>
 
-      <GameOverDialog state={state} targetDisease={targetDisease} />
+      <div>
+        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
+          Actions
+        </h2>
+        <ActionPanel
+          availableTests={availableTests}
+          diseases={allDiseases}
+          onSelectTest={handleOrderTest}
+          onGuess={handleGuess}
+          disabled={gameOver}
+        />
+      </div>
+
+      <GameOverDialog state={state} targetDisease={targetDisease} allDiseases={allDiseases} />
     </div>
   );
 }

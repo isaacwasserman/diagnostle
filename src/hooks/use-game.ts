@@ -1,8 +1,7 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo } from "react";
 import type { GameState, DiseaseProfile } from "@/data/types";
 import { createGame, orderTest, makeGuess, getAvailableTests } from "@/game/engine";
 import { dateSeed, todayDateStr } from "@/game/daily";
-import { saveGameState, loadGameState, recordGameResult } from "@/game/storage";
 import { MAX_TURNS } from "@/game/scoring";
 
 export function useGame(allDiseases: readonly DiseaseProfile[]) {
@@ -14,26 +13,9 @@ export function useGame(allDiseases: readonly DiseaseProfile[]) {
     [allDiseases]
   );
 
-  const [state, setState] = useState<GameState>(() => {
-    // Try to restore saved state
-    const saved = loadGameState(dateStr);
-    if (saved) {
-      return {
-        date: saved.date,
-        diseaseId: saved.diseaseId,
-        chiefComplaint: saved.chiefComplaint,
-        turns: saved.turns,
-        status: saved.status,
-        maxTurns: saved.maxTurns,
-      };
-    }
-    return createGame(dateStr, allDiseases);
-  });
-
-  // Persist state on every change
-  useEffect(() => {
-    saveGameState(state);
-  }, [state]);
+  const [state, setState] = useState<GameState>(() =>
+    createGame(dateStr, allDiseases)
+  );
 
   const targetDisease = useMemo(
     () => diseaseMap.get(state.diseaseId)!,
@@ -47,13 +29,7 @@ export function useGame(allDiseases: readonly DiseaseProfile[]) {
 
   const handleOrderTest = useCallback(
     (testId: string) => {
-      setState((prev) => {
-        const next = orderTest(prev, testId, targetDisease, seedNum);
-        if (next.status === "lost") {
-          recordGameResult(false, next.turns.length);
-        }
-        return next;
-      });
+      setState((prev) => orderTest(prev, testId, targetDisease, seedNum));
     },
     [targetDisease, seedNum]
   );
@@ -62,15 +38,7 @@ export function useGame(allDiseases: readonly DiseaseProfile[]) {
     (guessId: string) => {
       const guessedDisease = diseaseMap.get(guessId);
       const guessName = guessedDisease?.name ?? guessId;
-      setState((prev) => {
-        const next = makeGuess(prev, guessId, guessName, targetDisease, guessedDisease);
-        if (next.status === "won") {
-          recordGameResult(true, next.turns.length);
-        } else if (next.status === "lost") {
-          recordGameResult(false, next.turns.length);
-        }
-        return next;
-      });
+      setState((prev) => makeGuess(prev, guessId, guessName, targetDisease, guessedDisease));
     },
     [diseaseMap, targetDisease]
   );
