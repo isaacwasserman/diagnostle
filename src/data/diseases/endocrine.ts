@@ -1,6 +1,6 @@
 import type { DiseaseDef } from "../types";
 import {
-  hyperglycaemia,
+  hyperglycemia,
   metabolicAcidosis,
   acuteInflammation,
 } from "../patterns";
@@ -13,7 +13,7 @@ export const diseases: DiseaseDef[] = [
     organSystem: "endocrine",
     severity: "moderate",
     keywords: ["type 1 diabetes", "t1dm", "insulin dependent", "autoimmune diabetes"],
-    patterns: [hyperglycaemia],
+    patterns: [hyperglycemia],
     overrides: {
       urine_dipstick: { value: "Glucose +++, ketones +" },
     },
@@ -25,7 +25,7 @@ export const diseases: DiseaseDef[] = [
     organSystem: "endocrine",
     severity: "moderate",
     keywords: ["type 2 diabetes", "t2dm", "insulin resistance", "metabolic syndrome"],
-    patterns: [hyperglycaemia],
+    patterns: [hyperglycemia],
     overrides: {
       urine_dipstick: { value: "Glucose ++, no ketones" },
     },
@@ -37,7 +37,7 @@ export const diseases: DiseaseDef[] = [
     organSystem: "endocrine",
     severity: "critical",
     keywords: ["dka", "ketoacidosis", "diabetic emergency", "kussmaul breathing"],
-    patterns: [hyperglycaemia, metabolicAcidosis],
+    patterns: [hyperglycemia, metabolicAcidosis],
     overrides: {
       urine_dipstick: { value: "Glucose +++, ketones +++" },
       sodium: { direction: "low", range: [125, 134] },
@@ -49,12 +49,12 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["fatigue", "weight gain", "cold intolerance", "constipation"],
     organSystem: "endocrine",
     severity: "mild",
-    keywords: ["hypothyroid", "underactive thyroid", "hashimoto", "myxoedema"],
+    keywords: ["hypothyroid", "underactive thyroid", "hashimoto", "myxedema"],
     patterns: [],
     overrides: {
       tsh: { direction: "high", range: [10, 100] },
       heart_rate: { direction: "low", range: [45, 58] },
-      haemoglobin: { direction: "low", range: [9, 11.5] },
+      hemoglobin: { direction: "low", range: [9, 11.5] },
     },
   },
   {

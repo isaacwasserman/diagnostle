@@ -127,7 +127,7 @@ export const chronicRenalFailure: LabPattern = {
     bun: { direction: "high", range: [25, 60] },
     potassium: { direction: "high", range: [5.0, 6.5] },
     calcium: { direction: "low", range: [6.5, 8.0] },
-    haemoglobin: { direction: "low", range: [7, 11] },
+    hemoglobin: { direction: "low", range: [7, 11] },
     bicarbonate: { direction: "low", range: [15, 21] },
   },
 };
@@ -171,38 +171,38 @@ export const obstructiveAirway: LabPattern = {
   },
 };
 
-// ---- Anaemia ----
+// ---- Anemia ----
 
-export const anaemia: LabPattern = {
-  name: "anaemia",
+export const anemia: LabPattern = {
+  name: "anemia",
   abnormals: {
-    haemoglobin: { direction: "low", range: [5, 11] },
+    hemoglobin: { direction: "low", range: [5, 11] },
     rbc: { direction: "low", range: [2.5, 4.0] },
-    haematocrit: { direction: "low", range: [20, 35] },
+    hematocrit: { direction: "low", range: [20, 35] },
     heart_rate: { direction: "high", range: [90, 120] },
   },
 };
 
-export const microcyticAnaemia: LabPattern = {
-  name: "microcyticAnaemia",
+export const microcyticAnemia: LabPattern = {
+  name: "microcyticAnemia",
   abnormals: {
-    ...anaemia.abnormals,
+    ...anemia.abnormals,
     mcv: { direction: "low", range: [55, 78] },
   },
 };
 
-export const macrocyticAnaemia: LabPattern = {
-  name: "macrocyticAnaemia",
+export const macrocyticAnemia: LabPattern = {
+  name: "macrocyticAnemia",
   abnormals: {
-    ...anaemia.abnormals,
+    ...anemia.abnormals,
     mcv: { direction: "high", range: [101, 130] },
   },
 };
 
 // ---- Endocrine ----
 
-export const hyperglycaemia: LabPattern = {
-  name: "hyperglycaemia",
+export const hyperglycemia: LabPattern = {
+  name: "hyperglycemia",
   abnormals: {
     glucose: { direction: "high", range: [200, 600] },
     hba1c: { direction: "high", range: [7, 14] },
@@ -234,7 +234,7 @@ export const autoimmune: LabPattern = {
   abnormals: {
     ...chronicInflammation.abnormals,
     wbc: { direction: "low", range: [2.5, 4.0] },
-    haemoglobin: { direction: "low", range: [9, 12] },
+    hemoglobin: { direction: "low", range: [9, 12] },
   },
 };
 
@@ -244,17 +244,17 @@ export const malignancy: LabPattern = {
   name: "malignancy",
   abnormals: {
     albumin: { direction: "low", range: [2.0, 3.3] },
-    haemoglobin: { direction: "low", range: [8, 11.5] },
+    hemoglobin: { direction: "low", range: [8, 11.5] },
     esr: { direction: "high", range: [40, 100] },
     calcium: { direction: "high", range: [10.8, 14] },
   },
 };
 
-export const leukaemia: LabPattern = {
-  name: "leukaemia",
+export const leukemia: LabPattern = {
+  name: "leukemia",
   abnormals: {
     wbc: { direction: "high", range: [20, 200] },
-    haemoglobin: { direction: "low", range: [5, 10] },
+    hemoglobin: { direction: "low", range: [5, 10] },
     platelets: { direction: "low", range: [10, 80] },
     esr: { direction: "high", range: [50, 120] },
     lactate: { direction: "high", range: [2.5, 6] },

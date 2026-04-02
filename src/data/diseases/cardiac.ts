@@ -24,7 +24,7 @@ export const diseases: DiseaseDef[] = [
       troponin: { direction: "high", range: [2, 50] },
       heart_rate: { direction: "high", range: [90, 130] },
       bp_systolic: { direction: "low", range: [80, 100] },
-      chest_xray: { value: "Possible pulmonary oedema" },
+      chest_xray: { value: "Possible pulmonary edema" },
       heart_auscultation: { value: "S4 gallop" },
     },
   },
@@ -112,8 +112,8 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       bp_systolic: { direction: "low", range: [70, 95] },
       heart_rate: { direction: "high", range: [100, 140] },
-      haemoglobin: { direction: "low", range: [6, 10] },
-      ct_abdomen: { value: "Dilated abdominal aorta >5.5 cm, possible retroperitoneal haematoma" },
+      hemoglobin: { direction: "low", range: [6, 10] },
+      ct_abdomen: { value: "Dilated abdominal aorta >5.5 cm, possible retroperitoneal hematoma" },
       abdominal_ultrasound: { value: "Aortic dilatation >5.5 cm" },
       abdominal_exam: { value: "Pulsatile expansile mass, tender" },
       lactate: { direction: "high", range: [2.5, 8] },
@@ -127,7 +127,7 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["chest pain on exertion", "shortness of breath", "fatigue"],
     organSystem: "cardiovascular",
     severity: "moderate",
-    keywords: ["coronary heart disease", "chd", "coronary artery disease", "cad", "ischaemic heart disease"],
+    keywords: ["coronary heart disease", "chd", "coronary artery disease", "cad", "ischemic heart disease"],
     patterns: [],
     overrides: {
       ecg: { value: "ST depression on exercise stress test" },
@@ -151,9 +151,9 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       heart_auscultation: { value: "New regurgitant murmur" },
       echocardiogram: { value: "Valvular vegetations identified" },
-      haemoglobin: { direction: "low", range: [8, 11] },
+      hemoglobin: { direction: "low", range: [8, 11] },
       creatinine: { direction: "high", range: [1.3, 2.5] },
-      skin_exam: { value: "Janeway lesions, Osler nodes, splinter haemorrhages" },
+      skin_exam: { value: "Janeway lesions, Osler nodes, splinter hemorrhages" },
     },
   },
 
@@ -265,7 +265,7 @@ export const diseases: DiseaseDef[] = [
   {
     id: "pulmonary_embolism",
     name: "Pulmonary Embolism",
-    chiefComplaints: ["sudden shortness of breath", "pleuritic chest pain", "haemoptysis"],
+    chiefComplaints: ["sudden shortness of breath", "pleuritic chest pain", "hemoptysis"],
     organSystem: "cardiovascular",
     severity: "critical",
     keywords: ["pe", "pulmonary embolism", "lung clot", "thromboembolism"],
