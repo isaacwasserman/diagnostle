@@ -53,7 +53,7 @@ export function TestSelector({ availableTests, onSelectTest, disabled }: Props) 
   }, [availableTests]);
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden py-1">
       <Command>
         <CommandInput placeholder="Search tests..." />
         <CommandList>

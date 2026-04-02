@@ -9,7 +9,7 @@ export function TestResultCard({ result }: Props) {
   const isNumeric = typeof result.value === "number";
 
   return (
-    <div className={`rounded-lg border p-3 ${result.abnormal ? "border-red-300 bg-red-50" : "border-border bg-card"}`}>
+    <div className={`rounded-lg border p-3 ${result.abnormal ? "border-destructive/30 bg-destructive/10" : "border-border bg-card"}`}>
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
@@ -26,7 +26,7 @@ export function TestResultCard({ result }: Props) {
         </div>
         {isNumeric && (
           <div className="text-right shrink-0">
-            <p className={`text-sm font-mono font-semibold ${result.abnormal ? "text-red-700" : "text-foreground"}`}>
+            <p className={`text-sm font-mono font-semibold ${result.abnormal ? "text-destructive" : "text-foreground"}`}>
               {result.value} {result.unit ?? ""}
             </p>
             {result.normalRange && (
@@ -36,7 +36,7 @@ export function TestResultCard({ result }: Props) {
         )}
       </div>
       {!isNumeric && (
-        <p className={`text-sm mt-1.5 ${result.abnormal ? "text-red-700 font-medium" : "text-foreground"}`}>
+        <p className={`text-sm mt-1.5 ${result.abnormal ? "text-destructive font-medium" : "text-foreground"}`}>
           {result.value}
         </p>
       )}

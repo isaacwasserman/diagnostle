@@ -1,5 +1,6 @@
 import type { DiagnosticTest, DiseaseProfile } from "@/data/types";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { FlaskConical, Lightbulb } from "lucide-react";
 import { TestSelector } from "./test-selector";
 import { GuessInput } from "./guess-input";
 
@@ -15,8 +16,8 @@ export function ActionPanel({ availableTests, diseases, onSelectTest, onGuess, d
   return (
     <Tabs defaultValue="test" className="w-full">
       <TabsList className="w-full">
-        <TabsTrigger value="test" className="flex-1">Run Test</TabsTrigger>
-        <TabsTrigger value="guess" className="flex-1">Guess Diagnosis</TabsTrigger>
+        <TabsTrigger value="test" className="flex-1"><FlaskConical className="size-4" /> Run Test</TabsTrigger>
+        <TabsTrigger value="guess" className="flex-1"><Lightbulb className="size-4" /> Guess Diagnosis</TabsTrigger>
       </TabsList>
       <TabsContent value="test">
         <TestSelector
