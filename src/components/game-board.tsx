@@ -15,7 +15,6 @@ export function GameBoard({ diseases }: Props) {
     targetDisease,
     availableTests,
     allDiseases,
-    turnsRemaining,
     handleOrderTest,
     handleGuess,
   } = useGame(diseases);
