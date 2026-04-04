@@ -22,6 +22,11 @@ function fromDate(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
+function genRandDate(): string{
+  const startDate = new Date('2001-06-15');
+  return new Date(startDate.getTime() + Math.random() * (new Date().getTime() - startDate.getTime())).toISOString().slice(0,10);
+}
+
 export function ArchivePicker({ dateStr, onDateChange }: Props) {
   const today = todayDateStr();
   const isToday = dateStr === today;
@@ -50,6 +55,14 @@ export function ArchivePicker({ dateStr, onDateChange }: Props) {
           defaultMonth={selected}
           initialFocus
         />
+        <div className="border-t px-3 py-2">
+          <button
+            onClick = {() => onDateChange(genRandDate())}
+            className="w-full text-xs font-medium text-primary hover:underline"
+          >
+            Endless
+          </button>  
+        </div>
         {!isToday && (
           <div className="border-t px-3 py-2">
             <button
