@@ -1,13 +1,13 @@
-import type { DiseaseDef } from "../types";
 import {
-  bacterialInfection,
-  viralInfection,
-  severeInfection,
   acuteInflammation,
-  respiratoryDistress,
-  hepatocellularDamage,
+  bacterialInfection,
   chronicInflammation,
-} from "../patterns";
+  hepatocellularDamage,
+  respiratoryDistress,
+  severeInfection,
+  viralInfection,
+} from "../patterns"
+import type { DiseaseDef } from "../types"
 
 export const diseases: DiseaseDef[] = [
   // ---- Bacterial respiratory ----
@@ -57,7 +57,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "whooping_cough",
     name: "Whooping cough",
-    chiefComplaints: ["paroxysmal cough", "inspiratory whoop", "post-tussive vomiting"],
+    chiefComplaints: [
+      "paroxysmal cough",
+      "inspiratory whoop",
+      "post-tussive vomiting",
+    ],
     organSystem: "infectious",
     severity: "moderate",
     keywords: ["whooping cough", "pertussis", "bordetella"],
@@ -73,7 +77,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "sepsis",
     name: "Sepsis",
-    chiefComplaints: ["fever with confusion", "feeling very unwell", "rapid breathing"],
+    chiefComplaints: [
+      "fever with confusion",
+      "feeling very unwell",
+      "rapid breathing",
+    ],
     organSystem: "infectious",
     severity: "critical",
     keywords: ["sepsis", "septicemia", "blood poisoning"],
@@ -99,7 +107,9 @@ export const diseases: DiseaseDef[] = [
       hemoglobin: { direction: "low", range: [6, 10] },
       platelets: { direction: "low", range: [30, 100] },
       bilirubin: { direction: "high", range: [2, 8] },
-      blood_cultures: { value: "Plasmodium parasites identified on thick/thin blood film" },
+      blood_cultures: {
+        value: "Plasmodium parasites identified on thick/thin blood film",
+      },
       lactate: { direction: "high", range: [2, 6] },
     },
   },
@@ -113,7 +123,10 @@ export const diseases: DiseaseDef[] = [
     patterns: [acuteInflammation],
     overrides: {
       temperature: { direction: "high", range: [37.8, 39] },
-      skin_exam: { value: "Erythema migrans — expanding annular rash with central clearing" },
+      skin_exam: {
+        value:
+          "Erythema migrans — expanding annular rash with central clearing",
+      },
       alt: { direction: "high", range: [40, 120] },
     },
   },
@@ -122,7 +135,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "hiv",
     name: "HIV",
-    chiefComplaints: ["persistent fatigue", "recurrent infections", "unexplained weight loss"],
+    chiefComplaints: [
+      "persistent fatigue",
+      "recurrent infections",
+      "unexplained weight loss",
+    ],
     organSystem: "infectious",
     severity: "severe",
     keywords: ["hiv", "human immunodeficiency virus", "aids"],
@@ -136,13 +153,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "measles",
     name: "Measles",
-    chiefComplaints: ["rash with fever", "cough and runny nose", "red watery eyes"],
+    chiefComplaints: [
+      "rash with fever",
+      "cough and runny nose",
+      "red watery eyes",
+    ],
     organSystem: "infectious",
     severity: "moderate",
     keywords: ["measles", "rubeola", "morbillivirus"],
     patterns: [viralInfection],
     overrides: {
-      skin_exam: { value: "Maculopapular rash spreading from face to trunk; Koplik spots on buccal mucosa" },
+      skin_exam: {
+        value:
+          "Maculopapular rash spreading from face to trunk; Koplik spots on buccal mucosa",
+      },
       wbc: { direction: "low", range: [2.0, 3.5] },
     },
   },
@@ -155,34 +179,49 @@ export const diseases: DiseaseDef[] = [
     keywords: ["chickenpox", "varicella", "varicella zoster"],
     patterns: [viralInfection],
     overrides: {
-      skin_exam: { value: "Crops of vesicles in varying stages — macules, papules, vesicles, crusts" },
+      skin_exam: {
+        value:
+          "Crops of vesicles in varying stages — macules, papules, vesicles, crusts",
+      },
       alt: { direction: "high", range: [40, 100] },
     },
   },
   {
     id: "shingles",
     name: "Shingles",
-    chiefComplaints: ["painful blistering rash on one side", "burning skin pain", "tingling sensation"],
+    chiefComplaints: [
+      "painful blistering rash on one side",
+      "burning skin pain",
+      "tingling sensation",
+    ],
     organSystem: "infectious",
     severity: "moderate",
     keywords: ["shingles", "herpes zoster", "varicella zoster reactivation"],
     patterns: [viralInfection],
     overrides: {
-      skin_exam: { value: "Unilateral dermatomal vesicular rash with erythematous base" },
+      skin_exam: {
+        value: "Unilateral dermatomal vesicular rash with erythematous base",
+      },
       crp: { direction: "high", range: [5, 25] },
     },
   },
   {
     id: "mumps",
     name: "Mumps",
-    chiefComplaints: ["swollen parotid glands", "fever", "jaw pain when chewing"],
+    chiefComplaints: [
+      "swollen parotid glands",
+      "fever",
+      "jaw pain when chewing",
+    ],
     organSystem: "infectious",
     severity: "mild",
     keywords: ["mumps", "parotitis", "paramyxovirus"],
     patterns: [viralInfection],
     overrides: {
       alp: { direction: "high", range: [150, 400] },
-      abdominal_exam: { value: "Bilateral parotid gland swelling with tenderness" },
+      abdominal_exam: {
+        value: "Bilateral parotid gland swelling with tenderness",
+      },
       skin_exam: { value: "No rash; bilateral jaw swelling" },
     },
   },
@@ -205,27 +244,43 @@ export const diseases: DiseaseDef[] = [
   {
     id: "meningitis_bacterial",
     name: "Meningitis (bacterial)",
-    chiefComplaints: ["severe headache with neck stiffness", "high fever", "sensitivity to light"],
+    chiefComplaints: [
+      "severe headache with neck stiffness",
+      "high fever",
+      "sensitivity to light",
+    ],
     organSystem: "infectious",
     severity: "critical",
     keywords: ["meningitis", "meningococcal", "bacterial meningitis"],
     patterns: [severeInfection],
     overrides: {
       gcs: { direction: "low", range: [8, 13] },
-      neurological_exam: { value: "Neck stiffness, positive Kernig sign, photophobia" },
-      lumbar_puncture: { value: "Turbid CSF; elevated WCC (neutrophils), high protein, low glucose" },
+      neurological_exam: {
+        value: "Neck stiffness, positive Kernig sign, photophobia",
+      },
+      lumbar_puncture: {
+        value:
+          "Turbid CSF; elevated WCC (neutrophils), high protein, low glucose",
+      },
     },
   },
   {
     id: "scarlet_fever",
     name: "Scarlet fever",
-    chiefComplaints: ["sore throat with rash", "high fever", "strawberry tongue"],
+    chiefComplaints: [
+      "sore throat with rash",
+      "high fever",
+      "strawberry tongue",
+    ],
     organSystem: "infectious",
     severity: "moderate",
     keywords: ["scarlet fever", "scarlatina", "group a strep"],
     patterns: [bacterialInfection],
     overrides: {
-      skin_exam: { value: "Diffuse sandpaper-like erythematous rash with circumoral pallor" },
+      skin_exam: {
+        value:
+          "Diffuse sandpaper-like erythematous rash with circumoral pallor",
+      },
       abdominal_exam: { value: "Tonsillar exudate with strawberry tongue" },
     },
     remove: ["blood_cultures"],
@@ -239,20 +294,29 @@ export const diseases: DiseaseDef[] = [
     keywords: ["cellulitis", "skin infection", "soft tissue infection"],
     patterns: [bacterialInfection],
     overrides: {
-      skin_exam: { value: "Erythematous, warm, edematous area with poorly defined borders" },
+      skin_exam: {
+        value: "Erythematous, warm, edematous area with poorly defined borders",
+      },
     },
     remove: ["blood_cultures"],
   },
   {
     id: "impetigo",
     name: "Impetigo",
-    chiefComplaints: ["crusty sores on face", "blistering skin lesions", "itchy skin patches"],
+    chiefComplaints: [
+      "crusty sores on face",
+      "blistering skin lesions",
+      "itchy skin patches",
+    ],
     organSystem: "infectious",
     severity: "mild",
     keywords: ["impetigo", "school sores", "staph skin infection"],
     patterns: [acuteInflammation],
     overrides: {
-      skin_exam: { value: "Honey-colored crusted lesions on erythematous base, perioral and perinasal" },
+      skin_exam: {
+        value:
+          "Honey-colored crusted lesions on erythematous base, perioral and perinasal",
+      },
       temperature: { direction: "high", range: [37.2, 38] },
     },
     remove: ["esr"],
@@ -260,15 +324,26 @@ export const diseases: DiseaseDef[] = [
   {
     id: "clostridium_difficile",
     name: "Clostridium difficile",
-    chiefComplaints: ["watery diarrhea", "abdominal pain", "fever after antibiotics"],
+    chiefComplaints: [
+      "watery diarrhea",
+      "abdominal pain",
+      "fever after antibiotics",
+    ],
     organSystem: "infectious",
     severity: "moderate",
-    keywords: ["c diff", "clostridium difficile", "cdiff", "pseudomembranous colitis"],
+    keywords: [
+      "c diff",
+      "clostridium difficile",
+      "cdiff",
+      "pseudomembranous colitis",
+    ],
     patterns: [bacterialInfection],
     overrides: {
       albumin: { direction: "low", range: [2.0, 3.2] },
       creatinine: { direction: "high", range: [1.3, 2.5] },
-      ct_abdomen: { value: "Dilated colon with thumbprinting pattern, wall thickening" },
+      ct_abdomen: {
+        value: "Dilated colon with thumbprinting pattern, wall thickening",
+      },
     },
   },
   {
@@ -284,7 +359,9 @@ export const diseases: DiseaseDef[] = [
       platelets: { direction: "low", range: [30, 100] },
       creatinine: { direction: "high", range: [2.0, 6.0] },
       bilirubin: { direction: "high", range: [2, 6] },
-      abdominal_exam: { value: "Diffuse abdominal tenderness, bloody stool on examination" },
+      abdominal_exam: {
+        value: "Diffuse abdominal tenderness, bloody stool on examination",
+      },
     },
   },
 
@@ -331,4 +408,4 @@ export const diseases: DiseaseDef[] = [
       platelets: { direction: "low", range: [80, 140] },
     },
   },
-];
+]

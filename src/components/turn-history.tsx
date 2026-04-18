@@ -1,26 +1,27 @@
-import type { Turn } from "@/data/types";
-import { TestResultCard } from "./test-result-card";
-import { GuessResultCard } from "./guess-result-card";
+import type { Turn } from "@/data/types"
+import { GuessResultCard } from "./guess-result-card"
+import { TestResultCard } from "./test-result-card"
 
 interface Props {
-  turns: Turn[];
-  maxTurns: number;
+  turns: Turn[]
+  maxTurns: number
 }
 
 export function TurnHistory({ turns, maxTurns }: Props) {
-  const remaining = maxTurns - turns.length;
+  const remaining = maxTurns - turns.length
 
   if (turns.length === 0) {
     return (
       <p className="text-center py-6 text-sm text-muted-foreground">
         Run a test or guess a diagnosis to begin.
       </p>
-    );
+    )
   }
 
   return (
     <div className="space-y-2">
       {turns.map((turn, i) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: turns are append-only
         <div key={i}>
           {turn.type === "test" ? (
             <TestResultCard result={turn.result} />
@@ -39,5 +40,5 @@ export function TurnHistory({ turns, maxTurns }: Props) {
         </p>
       )}
     </div>
-  );
+  )
 }

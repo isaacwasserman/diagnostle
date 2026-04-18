@@ -1,17 +1,17 @@
-import { Stethoscope } from "lucide-react";
+import { Stethoscope } from "lucide-react"
 
 interface Props {
-  complaint: string;
-  dateStr: string;
+  complaint: string
+  dateStr: string
 }
 
 export function ChiefComplaintBanner({ complaint, dateStr }: Props) {
-  const [y, m, d] = dateStr.split("-").map(Number);
+  const [y, m, d] = dateStr.split("-").map(Number)
   const displayDate = new Date(y!, m! - 1, d!).toLocaleDateString("en-GB", {
     day: "numeric",
     month: "short",
     year: "numeric",
-  });
+  })
 
   return (
     <div className="rounded-2xl bg-primary px-5 py-4">
@@ -32,5 +32,5 @@ export function ChiefComplaintBanner({ complaint, dateStr }: Props) {
         </p>
       </div>
     </div>
-  );
+  )
 }

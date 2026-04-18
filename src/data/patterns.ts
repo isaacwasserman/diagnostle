@@ -1,4 +1,4 @@
-import type { LabPattern } from "./types";
+import type { LabPattern } from "./types"
 
 // ---- Inflammatory / Infection ----
 
@@ -9,7 +9,7 @@ export const acuteInflammation: LabPattern = {
     esr: { direction: "high", range: [30, 80] },
     wbc: { direction: "high", range: [11, 25] },
   },
-};
+}
 
 export const bacterialInfection: LabPattern = {
   name: "bacterialInfection",
@@ -20,7 +20,7 @@ export const bacterialInfection: LabPattern = {
     procalcitonin: { direction: "high", range: [2, 50] },
     blood_cultures: { value: "Positive — organism identified" },
   },
-};
+}
 
 export const viralInfection: LabPattern = {
   name: "viralInfection",
@@ -31,7 +31,7 @@ export const viralInfection: LabPattern = {
     esr: { direction: "high", range: [20, 50] },
     wbc: { direction: "low", range: [2, 3.8] },
   },
-};
+}
 
 export const severeInfection: LabPattern = {
   name: "severeInfection",
@@ -41,7 +41,7 @@ export const severeInfection: LabPattern = {
     bp_systolic: { direction: "low", range: [70, 90] },
     respiratory_rate: { direction: "high", range: [22, 35] },
   },
-};
+}
 
 // ---- Hepatic ----
 
@@ -54,7 +54,7 @@ export const hepatocellularDamage: LabPattern = {
     albumin: { direction: "low", range: [1.5, 3.2] },
     pt_inr: { direction: "high", range: [1.3, 2.5] },
   },
-};
+}
 
 export const cholestatic: LabPattern = {
   name: "cholestatic",
@@ -64,7 +64,7 @@ export const cholestatic: LabPattern = {
     alt: { direction: "high", range: [40, 150] },
     ast: { direction: "high", range: [35, 120] },
   },
-};
+}
 
 export const chronicLiver: LabPattern = {
   name: "chronicLiver",
@@ -76,7 +76,7 @@ export const chronicLiver: LabPattern = {
     pt_inr: { direction: "high", range: [1.2, 2.0] },
     platelets: { direction: "low", range: [60, 140] },
   },
-};
+}
 
 // ---- Cardiac ----
 
@@ -87,7 +87,7 @@ export const acuteCardiacInjury: LabPattern = {
     ck_mb: { direction: "high", range: [25, 300] },
     ecg: { value: "ST-segment changes" },
   },
-};
+}
 
 export const heartFailurePattern: LabPattern = {
   name: "heartFailure",
@@ -97,7 +97,7 @@ export const heartFailurePattern: LabPattern = {
     chest_xray: { value: "Pulmonary congestion, cardiomegaly" },
     spo2: { direction: "low", range: [88, 94] },
   },
-};
+}
 
 export const tachyarrhythmia: LabPattern = {
   name: "tachyarrhythmia",
@@ -106,7 +106,7 @@ export const tachyarrhythmia: LabPattern = {
     ecg: { value: "Abnormal rhythm detected" },
     bnp: { direction: "high", range: [100, 500] },
   },
-};
+}
 
 // ---- Renal ----
 
@@ -118,7 +118,7 @@ export const acuteRenalFailure: LabPattern = {
     potassium: { direction: "high", range: [5.5, 7.0] },
     bicarbonate: { direction: "low", range: [12, 20] },
   },
-};
+}
 
 export const chronicRenalFailure: LabPattern = {
   name: "chronicRenalFailure",
@@ -130,7 +130,7 @@ export const chronicRenalFailure: LabPattern = {
     hemoglobin: { direction: "low", range: [7, 11] },
     bicarbonate: { direction: "low", range: [15, 21] },
   },
-};
+}
 
 // ---- Coagulation ----
 
@@ -142,14 +142,14 @@ export const dic: LabPattern = {
     aptt: { direction: "high", range: [45, 90] },
     d_dimer: { direction: "high", range: [4, 20] },
   },
-};
+}
 
 export const thrombotic: LabPattern = {
   name: "thrombotic",
   abnormals: {
     d_dimer: { direction: "high", range: [1, 10] },
   },
-};
+}
 
 // ---- Respiratory ----
 
@@ -159,7 +159,7 @@ export const respiratoryDistress: LabPattern = {
     respiratory_rate: { direction: "high", range: [24, 40] },
     spo2: { direction: "low", range: [82, 93] },
   },
-};
+}
 
 export const obstructiveAirway: LabPattern = {
   name: "obstructiveAirway",
@@ -169,7 +169,7 @@ export const obstructiveAirway: LabPattern = {
     lung_auscultation: { value: "Widespread wheeze" },
     chest_xray: { value: "Hyperinflated lungs" },
   },
-};
+}
 
 // ---- Anemia ----
 
@@ -181,7 +181,7 @@ export const anemia: LabPattern = {
     hematocrit: { direction: "low", range: [20, 35] },
     heart_rate: { direction: "high", range: [90, 120] },
   },
-};
+}
 
 export const microcyticAnemia: LabPattern = {
   name: "microcyticAnemia",
@@ -189,7 +189,7 @@ export const microcyticAnemia: LabPattern = {
     ...anemia.abnormals,
     mcv: { direction: "low", range: [55, 78] },
   },
-};
+}
 
 export const macrocyticAnemia: LabPattern = {
   name: "macrocyticAnemia",
@@ -197,7 +197,7 @@ export const macrocyticAnemia: LabPattern = {
     ...anemia.abnormals,
     mcv: { direction: "high", range: [101, 130] },
   },
-};
+}
 
 // ---- Endocrine ----
 
@@ -207,7 +207,7 @@ export const hyperglycemia: LabPattern = {
     glucose: { direction: "high", range: [200, 600] },
     hba1c: { direction: "high", range: [7, 14] },
   },
-};
+}
 
 export const metabolicAcidosis: LabPattern = {
   name: "metabolicAcidosis",
@@ -216,7 +216,7 @@ export const metabolicAcidosis: LabPattern = {
     potassium: { direction: "high", range: [5.0, 7.0] },
     respiratory_rate: { direction: "high", range: [22, 36] },
   },
-};
+}
 
 // ---- Autoimmune / Chronic Inflammation ----
 
@@ -227,7 +227,7 @@ export const chronicInflammation: LabPattern = {
     esr: { direction: "high", range: [30, 100] },
     albumin: { direction: "low", range: [2.5, 3.4] },
   },
-};
+}
 
 export const autoimmune: LabPattern = {
   name: "autoimmune",
@@ -236,7 +236,7 @@ export const autoimmune: LabPattern = {
     wbc: { direction: "low", range: [2.5, 4.0] },
     hemoglobin: { direction: "low", range: [9, 12] },
   },
-};
+}
 
 // ---- Cancer / Malignancy ----
 
@@ -248,7 +248,7 @@ export const malignancy: LabPattern = {
     esr: { direction: "high", range: [40, 100] },
     calcium: { direction: "high", range: [10.8, 14] },
   },
-};
+}
 
 export const leukemia: LabPattern = {
   name: "leukemia",
@@ -259,7 +259,7 @@ export const leukemia: LabPattern = {
     esr: { direction: "high", range: [50, 120] },
     lactate: { direction: "high", range: [2.5, 6] },
   },
-};
+}
 
 // ---- Neurological ----
 
@@ -271,4 +271,4 @@ export const acuteStroke: LabPattern = {
     neurological_exam: { value: "Focal neurological deficit" },
     ct_head: { value: "Acute changes identified" },
   },
-};
+}

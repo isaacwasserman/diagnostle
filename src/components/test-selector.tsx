@@ -1,19 +1,19 @@
-import { useMemo, useState } from "react";
-import type { DiagnosticTest, TestCategory } from "@/data/types";
+import { useMemo, useState } from "react"
+import { Card } from "@/components/ui/card"
 import {
   Command,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-} from "@/components/ui/command";
-import { Card } from "@/components/ui/card";
+  CommandList,
+} from "@/components/ui/command"
+import type { DiagnosticTest, TestCategory } from "@/data/types"
 
 interface Props {
-  availableTests: readonly DiagnosticTest[];
-  onSelectTest: (testId: string) => void;
-  disabled: boolean;
+  availableTests: readonly DiagnosticTest[]
+  onSelectTest: (testId: string) => void
+  disabled: boolean
 }
 
 const categoryLabels: Record<TestCategory, string> = {
@@ -28,38 +28,50 @@ const categoryLabels: Record<TestCategory, string> = {
   specialty: "Specialty",
   urinalysis: "Urinalysis",
   vitals: "Vitals",
-};
+}
 
 // Alphabetical category order
 const categoryOrder: TestCategory[] = [
-  "bmp", "cardiac", "cbc", "coagulation", "imaging",
-  "inflammatory", "liver", "physical_exam", "specialty",
-  "urinalysis", "vitals",
-];
+  "bmp",
+  "cardiac",
+  "cbc",
+  "coagulation",
+  "imaging",
+  "inflammatory",
+  "liver",
+  "physical_exam",
+  "specialty",
+  "urinalysis",
+  "vitals",
+]
 
-export function TestSelector({ availableTests, onSelectTest, disabled }: Props) {
-  const [search, setSearch] = useState("");
+export function TestSelector({
+  availableTests,
+  onSelectTest,
+  disabled,
+}: Props) {
+  const [search, setSearch] = useState("")
 
   const grouped = useMemo(() => {
-    const map = new Map<TestCategory, DiagnosticTest[]>();
+    const map = new Map<TestCategory, DiagnosticTest[]>()
     for (const test of availableTests) {
-      const list = map.get(test.category) ?? [];
-      list.push(test);
-      map.set(test.category, list);
+      const list = map.get(test.category) ?? []
+      list.push(test)
+      map.set(test.category, list)
     }
     // Sort tests alphabetically within each category
     for (const [, list] of map) {
-      list.sort((a, b) => a.name.localeCompare(b.name));
+      list.sort((a, b) => a.name.localeCompare(b.name))
     }
-    return map;
-  }, [availableTests]);
+    return map
+  }, [availableTests])
 
   const sortedAll = useMemo(
     () => [...availableTests].sort((a, b) => a.name.localeCompare(b.name)),
-    [availableTests]
-  );
+    [availableTests],
+  )
 
-  const isSearching = search.trim().length > 0;
+  const isSearching = search.trim().length > 0
 
   return (
     <Card className="overflow-hidden py-1">
@@ -88,8 +100,8 @@ export function TestSelector({ availableTests, onSelectTest, disabled }: Props) 
                 </CommandItem>
               ))
             : categoryOrder.map((cat) => {
-                const testsInCat = grouped.get(cat);
-                if (!testsInCat || testsInCat.length === 0) return null;
+                const testsInCat = grouped.get(cat)
+                if (!testsInCat || testsInCat.length === 0) return null
                 return (
                   <CommandGroup key={cat} heading={categoryLabels[cat]}>
                     {testsInCat.map((test) => (
@@ -108,10 +120,10 @@ export function TestSelector({ availableTests, onSelectTest, disabled }: Props) 
                       </CommandItem>
                     ))}
                   </CommandGroup>
-                );
+                )
               })}
         </CommandList>
       </Command>
     </Card>
-  );
+  )
 }
