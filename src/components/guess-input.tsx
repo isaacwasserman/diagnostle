@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type { DiseaseProfile } from "@/data/types";
 import {
   Command,
@@ -22,7 +22,7 @@ const organSystemLabels: Record<string, string> = {
   cardiovascular: "Cardiovascular",
   endocrine: "Endocrine & Metabolic",
   gastrointestinal: "Gastrointestinal",
-  haematological: "Haematological",
+  hematological: "Hematological",
   infectious: "Infectious",
   musculoskeletal: "Musculoskeletal",
   neurological: "Neurological",
@@ -34,6 +34,8 @@ const organSystemLabels: Record<string, string> = {
 };
 
 export function GuessInput({ diseases, onGuess, disabled }: Props) {
+  const [search, setSearch] = useState("");
+
   const grouped = useMemo(() => {
     const map = new Map<string, DiseaseProfile[]>();
     for (const d of diseases) {
@@ -57,33 +59,56 @@ export function GuessInput({ diseases, onGuess, disabled }: Props) {
     [grouped]
   );
 
+  const sortedAll = useMemo(
+    () => [...diseases].sort((a, b) => a.name.localeCompare(b.name)),
+    [diseases]
+  );
+
+  const isSearching = search.trim().length > 0;
+
   return (
     <Card className="overflow-hidden py-1 flex-1 flex flex-col min-h-72 h-0">
       <Command>
-        <CommandInput placeholder="Search diseases..." />
+        <CommandInput
+          placeholder="Search diseases..."
+          value={search}
+          onValueChange={setSearch}
+        />
         <CommandList>
           <CommandEmpty>No diseases found.</CommandEmpty>
-          {sortedSystems.map((system) => {
-            const diseasesInSystem = grouped.get(system);
-            if (!diseasesInSystem || diseasesInSystem.length === 0) return null;
-            return (
-              <CommandGroup
-                key={system}
-                heading={organSystemLabels[system] ?? system}
-              >
-                {diseasesInSystem.map((d) => (
-                  <CommandItem
-                    key={d.id}
-                    value={`${d.name} ${d.keywords.join(" ")}`}
-                    disabled={disabled}
-                    onSelect={() => onGuess(d.id)}
+          {isSearching
+            ? sortedAll.map((d) => (
+                <CommandItem
+                  key={d.id}
+                  value={`${d.name} ${d.keywords.join(" ")}`}
+                  disabled={disabled}
+                  onSelect={() => onGuess(d.id)}
+                >
+                  {d.name}
+                </CommandItem>
+              ))
+            : sortedSystems.map((system) => {
+                const diseasesInSystem = grouped.get(system);
+                if (!diseasesInSystem || diseasesInSystem.length === 0)
+                  return null;
+                return (
+                  <CommandGroup
+                    key={system}
+                    heading={organSystemLabels[system] ?? system}
                   >
-                    {d.name}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            );
-          })}
+                    {diseasesInSystem.map((d) => (
+                      <CommandItem
+                        key={d.id}
+                        value={`${d.name} ${d.keywords.join(" ")}`}
+                        disabled={disabled}
+                        onSelect={() => onGuess(d.id)}
+                      >
+                        {d.name}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                );
+              })}
         </CommandList>
       </Command>
     </Card>

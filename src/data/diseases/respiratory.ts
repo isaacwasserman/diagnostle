@@ -36,7 +36,7 @@ export const diseases: DiseaseDef[] = [
     keywords: ["copd", "emphysema", "chronic bronchitis", "smoking"],
     patterns: [obstructiveAirway],
     overrides: {
-      haemoglobin: { direction: "high", range: [17.5, 20] },
+      hemoglobin: { direction: "high", range: [17.5, 20] },
       spirometry: {
         value:
           "Obstructive pattern — reduced FEV1/FVC ratio, not fully reversible",

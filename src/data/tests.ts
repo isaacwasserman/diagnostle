@@ -13,8 +13,8 @@ export const tests = [
   // ---- CBC ----
   { id: "wbc", name: "White Blood Cell Count", category: "cbc", resultType: "numeric", unit: "×10³/µL", normalRange: { low: 4.5, high: 11.0, label: "4.5–11.0 ×10³/µL" }, cost: 1 },
   { id: "rbc", name: "Red Blood Cell Count", category: "cbc", resultType: "numeric", unit: "×10⁶/µL", normalRange: { low: 4.2, high: 5.9, label: "4.2–5.9 ×10⁶/µL" }, cost: 1 },
-  { id: "haemoglobin", name: "Haemoglobin", category: "cbc", resultType: "numeric", unit: "g/dL", normalRange: { low: 12.0, high: 17.5, label: "12.0–17.5 g/dL" }, cost: 1 },
-  { id: "haematocrit", name: "Haematocrit", category: "cbc", resultType: "numeric", unit: "%", normalRange: { low: 36, high: 51, label: "36–51%" }, cost: 1 },
+  { id: "hemoglobin", name: "Hemoglobin", category: "cbc", resultType: "numeric", unit: "g/dL", normalRange: { low: 12.0, high: 17.5, label: "12.0–17.5 g/dL" }, cost: 1 },
+  { id: "hematocrit", name: "Hematocrit", category: "cbc", resultType: "numeric", unit: "%", normalRange: { low: 36, high: 51, label: "36–51%" }, cost: 1 },
   { id: "platelets", name: "Platelet Count", category: "cbc", resultType: "numeric", unit: "×10³/µL", normalRange: { low: 150, high: 400, label: "150–400 ×10³/µL" }, cost: 1 },
   { id: "mcv", name: "Mean Corpuscular Volume", category: "cbc", resultType: "numeric", unit: "fL", normalRange: { low: 80, high: 100, label: "80–100 fL" }, cost: 1 },
   { id: "reticulocyte_count", name: "Reticulocyte Count", category: "cbc", resultType: "numeric", unit: "%", normalRange: { low: 0.5, high: 2.5, label: "0.5–2.5%" }, cost: 2 },
