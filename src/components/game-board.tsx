@@ -23,7 +23,7 @@ export function GameBoard({ diseases, dateStr }: Props) {
   const gameOver = state.status !== "playing";
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-4 space-y-4">
+    <div className="mx-auto max-w-4xl px-4 pt-4 pb-6 space-y-4 flex-1 w-full flex flex-col min-h-0">
       <ChiefComplaintBanner complaint={state.chiefComplaint} dateStr={dateStr} />
 
       <div>
@@ -33,7 +33,7 @@ export function GameBoard({ diseases, dateStr }: Props) {
         <TurnHistory turns={state.turns} maxTurns={state.maxTurns} />
       </div>
 
-      <div>
+      <div className="flex-1 flex flex-col min-h-0">
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
           Actions
         </h2>

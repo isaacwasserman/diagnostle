@@ -9,7 +9,7 @@ function App() {
   const [dateStr, setDateStr] = useState(() => todayDateStr());
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="h-[100dvh] bg-background grid grid-rows-[auto_1fr] overflow-auto">
       <Header dateStr={dateStr} onDateChange={setDateStr} />
       <GameBoard diseases={diseaseRegistry} dateStr={dateStr} />
       <Toaster />

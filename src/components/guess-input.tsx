@@ -58,7 +58,7 @@ export function GuessInput({ diseases, onGuess, disabled }: Props) {
   );
 
   return (
-    <Card className="overflow-hidden py-1">
+    <Card className="overflow-hidden py-1 flex-1 flex flex-col min-h-72 h-0">
       <Command>
         <CommandInput placeholder="Search diseases..." />
         <CommandList>
