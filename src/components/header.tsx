@@ -8,12 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import { ArchivePicker } from "./archive-picker";
 
 type Theme = "light" | "dark" | "system";
-
-const iconButtonClass =
-  "flex items-center justify-center size-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors";
 
 interface HeaderProps {
   dateStr: string;
@@ -53,9 +51,9 @@ export function Header({ dateStr, onDateChange }: HeaderProps) {
         <ArchivePicker dateStr={dateStr} onDateChange={onDateChange} />
         <Dialog>
           <DialogTrigger asChild>
-            <button className={iconButtonClass} aria-label="How to play">
+            <Button variant="ghost" size="icon-sm" aria-label="How to play">
               <CircleHelp className="size-4" />
-            </button>
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
@@ -82,9 +80,10 @@ export function Header({ dateStr, onDateChange }: HeaderProps) {
             </div>
           </DialogContent>
         </Dialog>
-        <button
+        <Button
+          variant="ghost"
+          size="icon-sm"
           onClick={cycle}
-          className={iconButtonClass}
           aria-label={`Theme: ${theme}`}
         >
           {theme === "dark" ? (
@@ -94,7 +93,7 @@ export function Header({ dateStr, onDateChange }: HeaderProps) {
           ) : (
             <Monitor className="size-4" />
           )}
-        </button>
+        </Button>
       </div>
     </header>
   );

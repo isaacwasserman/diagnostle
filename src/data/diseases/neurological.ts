@@ -2,6 +2,8 @@ import type { DiseaseDef } from "../types";
 import {
   acuteStroke,
   malignancy,
+  viralInfection,
+  bacterialInfection,
 } from "../patterns";
 
 export const diseases: DiseaseDef[] = [
@@ -15,6 +17,7 @@ export const diseases: DiseaseDef[] = [
     patterns: [acuteStroke],
     overrides: {
       glucose: { direction: "high", range: [110, 200] },
+      doppler_ultrasound: { value: "Carotid stenosis or occlusion identified" },
     },
   },
   {
@@ -30,6 +33,7 @@ export const diseases: DiseaseDef[] = [
       neurological_exam: { value: "Resolving focal neurological deficit" },
       ct_head: { value: "No acute intracranial abnormality" },
       glucose: { direction: "high", range: [105, 160] },
+      doppler_ultrasound: { value: "Possible carotid stenosis" },
     },
     remove: ["ct_head"],
   },
@@ -147,5 +151,54 @@ export const diseases: DiseaseDef[] = [
       chest_xray: { value: "Anterior mediastinal mass — thymic enlargement" },
       respiratory_rate: { direction: "high", range: [20, 28] },
     },
+  },
+
+  // ---- New neurological diseases ----
+  {
+    id: "subdural_haematoma",
+    name: "Subdural haematoma",
+    chiefComplaints: ["headache after head injury", "confusion", "fluctuating consciousness"],
+    organSystem: "neurological",
+    severity: "severe",
+    keywords: ["subdural", "sdh", "subdural haematoma", "head injury", "bridging veins"],
+    patterns: [],
+    overrides: {
+      gcs: { direction: "low", range: [9, 14] },
+      ct_head: { value: "Crescent-shaped hyperdense collection over cerebral convexity" },
+      neurological_exam: { value: "Fluctuating consciousness, possible lateralising signs" },
+      bp_systolic: { direction: "high", range: [150, 200] },
+      pt_inr: { direction: "high", range: [1.2, 2.5] },
+    },
+  },
+  {
+    id: "encephalitis",
+    name: "Encephalitis",
+    chiefComplaints: ["confusion with fever", "seizure with fever", "personality change"],
+    organSystem: "neurological",
+    severity: "severe",
+    keywords: ["encephalitis", "viral encephalitis", "hsv encephalitis", "brain inflammation"],
+    patterns: [viralInfection],
+    overrides: {
+      gcs: { direction: "low", range: [8, 13] },
+      neurological_exam: { value: "Confusion, focal neurological deficit, possible seizures" },
+      lumbar_puncture: { value: "Lymphocytic pleocytosis, elevated protein, normal glucose" },
+      mri_brain: { value: "Temporal lobe signal abnormality (HSV pattern)" },
+      ct_head: { value: "Possible temporal lobe oedema" },
+    },
+  },
+  {
+    id: "viral_meningitis",
+    name: "Viral meningitis",
+    chiefComplaints: ["headache with neck stiffness", "photophobia", "fever"],
+    organSystem: "neurological",
+    severity: "moderate",
+    keywords: ["viral meningitis", "aseptic meningitis", "enteroviral meningitis"],
+    patterns: [viralInfection],
+    overrides: {
+      neurological_exam: { value: "Neck stiffness, positive Kernig sign, no focal deficits" },
+      lumbar_puncture: { value: "Clear CSF, lymphocytic pleocytosis, normal glucose, mildly elevated protein" },
+      ct_head: { value: "No acute intracranial abnormality" },
+    },
+    remove: ["ct_head"],
   },
 ];

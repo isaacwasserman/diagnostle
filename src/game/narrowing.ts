@@ -55,7 +55,7 @@ export function getNarrowingSequence(
   return sequence;
 }
 
-const MAX_BAR = 10;
+const MAX_BAR = 5;
 
 export function narrowingEmojiLine(
   s: { count: number; type: "test" | "guess" },

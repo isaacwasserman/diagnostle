@@ -3,6 +3,7 @@ import {
   hyperglycaemia,
   metabolicAcidosis,
   acuteInflammation,
+  tachyarrhythmia,
 } from "../patterns";
 
 export const diseases: DiseaseDef[] = [
@@ -41,6 +42,9 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       urine_dipstick: { value: "Glucose +++, ketones +++" },
       sodium: { direction: "low", range: [125, 134] },
+      magnesium: { direction: "low", range: [1.0, 1.5] },
+      phosphate: { direction: "low", range: [1.0, 2.0] },
+      amylase: { direction: "high", range: [100, 300] },
     },
   },
   {
@@ -55,6 +59,8 @@ export const diseases: DiseaseDef[] = [
       tsh: { direction: "high", range: [10, 100] },
       heart_rate: { direction: "low", range: [45, 58] },
       haemoglobin: { direction: "low", range: [9, 11.5] },
+      thyroid_exam: { value: "Possible diffuse goitre, firm texture" },
+      magnesium: { direction: "low", range: [1.3, 1.6] },
     },
   },
   {
@@ -69,6 +75,8 @@ export const diseases: DiseaseDef[] = [
       tsh: { direction: "low", range: [0.01, 0.3] },
       heart_rate: { direction: "high", range: [100, 140] },
       calcium: { direction: "high", range: [10.6, 12] },
+      thyroid_exam: { value: "Diffuse goitre, thyroid bruit, possible exophthalmos" },
+      ecg: { value: "Sinus tachycardia or atrial fibrillation" },
     },
   },
   {
@@ -111,6 +119,9 @@ export const diseases: DiseaseDef[] = [
     patterns: [acuteInflammation],
     overrides: {
       creatinine: { direction: "high", range: [1.3, 2.5] },
+      uric_acid: { direction: "high", range: [8, 15] },
+      joint_aspiration: { value: "Negatively birefringent needle-shaped urate crystals" },
+      musculoskeletal_exam: { value: "Acutely swollen, erythematous, exquisitely tender joint (typically 1st MTP)" },
     },
   },
   {
@@ -125,6 +136,92 @@ export const diseases: DiseaseDef[] = [
       glucose: { direction: "high", range: [105, 180] },
       hba1c: { direction: "high", range: [5.7, 7.0] },
       abdominal_ultrasound: { value: "Polycystic ovarian morphology, multiple follicles" },
+    },
+  },
+
+  // ---- New endocrine diseases ----
+  {
+    id: "phaeochromocytoma",
+    name: "Phaeochromocytoma",
+    chiefComplaints: ["episodic headache", "palpitations with sweating", "anxiety attacks"],
+    organSystem: "endocrine",
+    severity: "severe",
+    keywords: ["phaeochromocytoma", "pheochromocytoma", "adrenal tumour", "catecholamine"],
+    patterns: [],
+    overrides: {
+      bp_systolic: { direction: "high", range: [180, 250] },
+      bp_diastolic: { direction: "high", range: [100, 140] },
+      heart_rate: { direction: "high", range: [110, 160] },
+      glucose: { direction: "high", range: [120, 250] },
+      ct_abdomen: { value: "Adrenal mass identified" },
+      ecg: { value: "Sinus tachycardia, possible LVH" },
+    },
+  },
+  {
+    id: "hyperparathyroidism",
+    name: "Hyperparathyroidism",
+    chiefComplaints: ["bone pain", "kidney stones", "fatigue", "constipation"],
+    organSystem: "endocrine",
+    severity: "moderate",
+    keywords: ["hyperparathyroidism", "parathyroid", "hypercalcaemia", "pth"],
+    patterns: [],
+    overrides: {
+      calcium: { direction: "high", range: [11, 14] },
+      phosphate: { direction: "low", range: [1.5, 2.4] },
+      alp: { direction: "high", range: [150, 400] },
+      creatinine: { direction: "high", range: [1.3, 2.5] },
+      urine_dipstick: { value: "Calcium ++, possible blood" },
+      x_ray_spine: { value: "Subperiosteal bone resorption, possible brown tumours" },
+    },
+  },
+  {
+    id: "thyroid_storm",
+    name: "Thyroid storm",
+    chiefComplaints: ["high fever with confusion", "severe palpitations", "agitation"],
+    organSystem: "endocrine",
+    severity: "critical",
+    keywords: ["thyroid storm", "thyroid crisis", "thyrotoxic crisis", "severe thyrotoxicosis"],
+    patterns: [tachyarrhythmia],
+    overrides: {
+      tsh: { direction: "low", range: [0.01, 0.05] },
+      temperature: { direction: "high", range: [39, 41] },
+      heart_rate: { direction: "high", range: [140, 200] },
+      gcs: { direction: "low", range: [10, 14] },
+      alt: { direction: "high", range: [60, 300] },
+      glucose: { direction: "high", range: [110, 250] },
+      thyroid_exam: { value: "Diffuse goitre, thyroid bruit" },
+      ecg: { value: "Atrial fibrillation with rapid ventricular response" },
+    },
+  },
+  {
+    id: "hyperosmolar_hyperglycaemic_state",
+    name: "Hyperosmolar hyperglycaemic state (HHS)",
+    chiefComplaints: ["confusion", "extreme thirst", "drowsiness"],
+    organSystem: "endocrine",
+    severity: "critical",
+    keywords: ["hhs", "honk", "hyperosmolar", "hyperglycaemic state"],
+    patterns: [hyperglycaemia],
+    overrides: {
+      glucose: { direction: "high", range: [500, 1200] },
+      sodium: { direction: "high", range: [146, 160] },
+      creatinine: { direction: "high", range: [1.5, 4.0] },
+      bun: { direction: "high", range: [25, 60] },
+      gcs: { direction: "low", range: [8, 13] },
+      urine_dipstick: { value: "Glucose ++++, no ketones" },
+    },
+  },
+  {
+    id: "diabetes_insipidus",
+    name: "Diabetes insipidus",
+    chiefComplaints: ["extreme thirst", "passing very large volumes of urine", "dehydration"],
+    organSystem: "endocrine",
+    severity: "moderate",
+    keywords: ["diabetes insipidus", "di", "polyuria", "polydipsia", "adh"],
+    patterns: [],
+    overrides: {
+      sodium: { direction: "high", range: [146, 160] },
+      urine_dipstick: { value: "Very dilute urine, specific gravity <1.005" },
+      creatinine: { direction: "high", range: [1.2, 2.5] },
     },
   },
 ];

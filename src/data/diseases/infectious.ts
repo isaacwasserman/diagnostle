@@ -22,6 +22,8 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       chest_xray: { value: "Lobar consolidation with air bronchograms" },
       lung_auscultation: { value: "Crackles and bronchial breath sounds" },
+      sputum_culture: { value: "Pathogenic organism isolated (e.g. Streptococcus pneumoniae)" },
+      ct_chest: { value: "Lobar consolidation with air bronchograms" },
     },
   },
   {
@@ -37,6 +39,9 @@ export const diseases: DiseaseDef[] = [
       chest_xray: { value: "Upper lobe cavitation with fibrosis" },
       wbc: { direction: "high", range: [11, 18] },
       haemoglobin: { direction: "low", range: [9, 12] },
+      sputum_culture: { value: "AFB positive — acid-fast bacilli identified" },
+      ct_chest: { value: "Upper lobe cavitation with tree-in-bud opacities" },
+      ferritin: { direction: "high", range: [400, 2000] },
     },
   },
   {
@@ -52,6 +57,8 @@ export const diseases: DiseaseDef[] = [
       chest_xray: { value: "Bilateral patchy infiltrates" },
       alt: { direction: "high", range: [60, 200] },
       creatinine: { direction: "high", range: [1.5, 3.0] },
+      sputum_culture: { value: "Negative on routine culture (Legionella requires special media)" },
+      ct_chest: { value: "Bilateral patchy ground-glass infiltrates with consolidation" },
     },
   },
   {
@@ -82,6 +89,10 @@ export const diseases: DiseaseDef[] = [
       creatinine: { direction: "high", range: [1.5, 4.0] },
       platelets: { direction: "low", range: [50, 140] },
       gcs: { direction: "low", range: [10, 14] },
+      fibrinogen: { direction: "high", range: [400, 800] },
+      ferritin: { direction: "high", range: [1000, 10000] },
+      ldh: { direction: "high", range: [300, 600] },
+      magnesium: { direction: "low", range: [1.0, 1.5] },
     },
   },
 
@@ -101,6 +112,9 @@ export const diseases: DiseaseDef[] = [
       bilirubin: { direction: "high", range: [2, 8] },
       blood_cultures: { value: "Plasmodium parasites identified on thick/thin blood film" },
       lactate: { direction: "high", range: [2, 6] },
+      peripheral_blood_smear: { value: "Plasmodium parasites within erythrocytes" },
+      ldh: { direction: "high", range: [400, 1000] },
+      ferritin: { direction: "high", range: [500, 5000] },
     },
   },
   {
@@ -198,6 +212,8 @@ export const diseases: DiseaseDef[] = [
       sodium: { direction: "low", range: [130, 135] },
       potassium: { direction: "low", range: [2.8, 3.4] },
       creatinine: { direction: "high", range: [1.2, 2.0] },
+      stool_sample: { value: "Viral particles detected (norovirus antigen positive)" },
+      magnesium: { direction: "low", range: [1.2, 1.6] },
     },
   },
 

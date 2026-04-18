@@ -1,6 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import { todayDateStr } from "@/game/daily";
 
 interface Props {
@@ -31,13 +32,15 @@ export function ArchivePicker({ dateStr, onDateChange }: Props) {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button
-          className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-1.5 text-xs text-muted-foreground"
           aria-label="Select puzzle date"
         >
           <CalendarDays className="size-3.5" />
           {isToday ? "Today" : formatLabel(dateStr)}
-        </button>
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="end">
         <Calendar
@@ -52,12 +55,14 @@ export function ArchivePicker({ dateStr, onDateChange }: Props) {
         />
         {!isToday && (
           <div className="border-t px-3 py-2">
-            <button
+            <Button
+              variant="link"
+              size="xs"
+              className="w-full"
               onClick={() => onDateChange(today)}
-              className="w-full text-xs font-medium text-primary hover:underline"
             >
               Back to today's puzzle
-            </button>
+            </Button>
           </div>
         )}
       </PopoverContent>

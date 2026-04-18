@@ -6,6 +6,7 @@ import {
   chronicLiver,
   chronicInflammation,
   malignancy,
+  bacterialInfection,
 } from "../patterns";
 
 export const diseases: DiseaseDef[] = [
@@ -38,6 +39,7 @@ export const diseases: DiseaseDef[] = [
       potassium: { direction: "low", range: [2.8, 3.4] },
       sodium: { direction: "low", range: [128, 135] },
       lactate: { direction: "high", range: [2.0, 5.0] },
+      amylase: { direction: "high", range: [100, 180] },
       ct_abdomen: { value: "Dilated loops of bowel with transition point, air-fluid levels" },
       abdominal_exam: { value: "Distended, tympanic, diffuse tenderness, high-pitched bowel sounds" },
     },
@@ -55,8 +57,10 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       haemoglobin: { direction: "low", range: [9.0, 11.5] },
       platelets: { direction: "high", range: [400, 600] },
+      ferritin: { direction: "low", range: [5, 18] },
       ct_abdomen: { value: "Terminal ileal wall thickening with skip lesions and mesenteric fat creeping" },
       abdominal_exam: { value: "RLQ tenderness, possible palpable mass" },
+      stool_sample: { value: "Elevated calprotectin >250 µg/g" },
     },
   },
   {
@@ -303,6 +307,57 @@ export const diseases: DiseaseDef[] = [
       heart_rate: { direction: "high", range: [90, 110] },
       ct_abdomen: { value: "Sigmoid diverticulosis with pericolonic fat stranding and localised wall thickening" },
       abdominal_exam: { value: "LLQ tenderness with localised guarding" },
+    },
+  },
+
+  // ---- New GI diseases ----
+  {
+    id: "ascending_cholangitis",
+    name: "Ascending cholangitis",
+    chiefComplaints: ["jaundice with fever", "right upper quadrant pain", "rigors"],
+    organSystem: "gastrointestinal",
+    severity: "severe",
+    keywords: ["cholangitis", "ascending cholangitis", "charcot triad", "bile duct infection"],
+    patterns: [cholestatic, bacterialInfection],
+    overrides: {
+      temperature: { direction: "high", range: [38.5, 40] },
+      abdominal_ultrasound: { value: "Dilated common bile duct, possible stone in CBD" },
+      abdominal_exam: { value: "RUQ tenderness, jaundice" },
+      amylase: { direction: "high", range: [100, 300] },
+      lipase: { direction: "high", range: [160, 400] },
+    },
+  },
+  {
+    id: "gi_perforation",
+    name: "Gastrointestinal perforation",
+    chiefComplaints: ["sudden severe abdominal pain", "rigid abdomen", "collapse"],
+    organSystem: "gastrointestinal",
+    severity: "critical",
+    keywords: ["perforation", "perforated bowel", "peritonitis", "pneumoperitoneum"],
+    patterns: [acuteInflammation],
+    overrides: {
+      temperature: { direction: "high", range: [38, 39.5] },
+      heart_rate: { direction: "high", range: [110, 140] },
+      bp_systolic: { direction: "low", range: [70, 95] },
+      lactate: { direction: "high", range: [2.5, 8] },
+      amylase: { direction: "high", range: [100, 400] },
+      ct_abdomen: { value: "Free intraperitoneal air, perforated viscus" },
+      chest_xray: { value: "Free gas under diaphragm (pneumoperitoneum)" },
+      abdominal_exam: { value: "Board-like rigidity, diffuse tenderness, absent bowel sounds" },
+    },
+  },
+  {
+    id: "irritable_bowel_syndrome",
+    name: "Irritable bowel syndrome (IBS)",
+    chiefComplaints: ["abdominal pain with bloating", "alternating bowel habit", "abdominal cramps"],
+    organSystem: "gastrointestinal",
+    severity: "mild",
+    keywords: ["ibs", "irritable bowel", "spastic colon"],
+    patterns: [],
+    overrides: {
+      stool_sample: { value: "No pathogens, no occult blood, normal calprotectin" },
+      abdominal_exam: { value: "Mild diffuse tenderness, no organomegaly, hyperactive bowel sounds" },
+      ct_abdomen: { value: "No structural abnormality identified" },
     },
   },
 ];

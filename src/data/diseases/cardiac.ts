@@ -26,6 +26,7 @@ export const diseases: DiseaseDef[] = [
       bp_systolic: { direction: "low", range: [80, 100] },
       chest_xray: { value: "Possible pulmonary oedema" },
       heart_auscultation: { value: "S4 gallop" },
+      magnesium: { direction: "low", range: [1.2, 1.5] },
     },
   },
 
@@ -79,6 +80,8 @@ export const diseases: DiseaseDef[] = [
       heart_auscultation: { value: "S3 gallop, displaced apex beat" },
       creatinine: { direction: "high", range: [1.3, 2.5] },
       sodium: { direction: "low", range: [128, 135] },
+      magnesium: { direction: "low", range: [1.3, 1.6] },
+      uric_acid: { direction: "high", range: [7.5, 12] },
     },
   },
 
@@ -154,6 +157,7 @@ export const diseases: DiseaseDef[] = [
       haemoglobin: { direction: "low", range: [8, 11] },
       creatinine: { direction: "high", range: [1.3, 2.5] },
       skin_exam: { value: "Janeway lesions, Osler nodes, splinter haemorrhages" },
+      ferritin: { direction: "high", range: [400, 1500] },
     },
   },
 
@@ -190,6 +194,7 @@ export const diseases: DiseaseDef[] = [
       crp: { direction: "high", range: [5, 30] },
       skin_exam: { value: "Pallor on elevation, dependent rubor, absent pedal pulses" },
       ecg: { value: "Left ventricular hypertrophy" },
+      doppler_ultrasound: { value: "Reduced ankle-brachial index, stenotic flow pattern" },
     },
   },
 
@@ -258,6 +263,8 @@ export const diseases: DiseaseDef[] = [
       crp: { direction: "high", range: [5, 40] },
       skin_exam: { value: "Unilateral leg swelling, warmth, erythema, positive Homans sign" },
       heart_rate: { direction: "high", range: [85, 110] },
+      doppler_ultrasound: { value: "Non-compressible vein, echogenic thrombus identified" },
+      fibrinogen: { direction: "high", range: [400, 700] },
     },
   },
 
@@ -279,6 +286,85 @@ export const diseases: DiseaseDef[] = [
       ecg: { value: "Sinus tachycardia, S1Q3T3 pattern, right heart strain" },
       spo2: { direction: "low", range: [82, 92] },
       bp_systolic: { direction: "low", range: [80, 100] },
+      ldh: { direction: "high", range: [300, 600] },
+      ct_chest: { value: "Wedge-shaped peripheral opacity (pulmonary infarct)" },
+    },
+  },
+
+  // ---- 16. Aortic Dissection ----
+  {
+    id: "aortic_dissection",
+    name: "Aortic Dissection",
+    chiefComplaints: ["tearing chest pain radiating to back", "sudden severe chest pain", "back pain"],
+    organSystem: "cardiovascular",
+    severity: "critical",
+    keywords: ["aortic dissection", "torn aorta", "type A dissection", "type B dissection"],
+    patterns: [],
+    overrides: {
+      bp_systolic: { direction: "high", range: [170, 230] },
+      heart_rate: { direction: "high", range: [100, 130] },
+      d_dimer: { direction: "high", range: [2, 20] },
+      troponin: { direction: "high", range: [0.04, 0.5] },
+      ct_angiogram: { value: "Intimal flap with true and false lumen — aortic dissection confirmed" },
+      ldh: { direction: "high", range: [300, 500] },
+      chest_xray: { value: "Widened mediastinum" },
+      ecg: { value: "Non-specific ST changes, possible LVH" },
+    },
+  },
+
+  // ---- 17. Cardiac Tamponade ----
+  {
+    id: "cardiac_tamponade",
+    name: "Cardiac Tamponade",
+    chiefComplaints: ["shortness of breath", "chest pain", "dizziness"],
+    organSystem: "cardiovascular",
+    severity: "critical",
+    keywords: ["cardiac tamponade", "pericardial effusion", "beck's triad", "pulsus paradoxus"],
+    patterns: [],
+    overrides: {
+      bp_systolic: { direction: "low", range: [70, 90] },
+      heart_rate: { direction: "high", range: [110, 140] },
+      echocardiogram: { value: "Large pericardial effusion with right ventricular diastolic collapse — tamponade physiology" },
+      ecg: { value: "Low voltage QRS, electrical alternans" },
+      chest_xray: { value: "Globular cardiac silhouette ('water bottle' heart)" },
+      troponin: { direction: "high", range: [0.04, 0.3] },
+    },
+  },
+
+  // ---- 18. Myocarditis ----
+  {
+    id: "myocarditis",
+    name: "Myocarditis",
+    chiefComplaints: ["chest pain", "fatigue", "shortness of breath"],
+    organSystem: "cardiovascular",
+    severity: "moderate",
+    keywords: ["myocarditis", "viral myocarditis", "cardiac inflammation"],
+    patterns: [acuteInflammation],
+    overrides: {
+      troponin: { direction: "high", range: [0.1, 5.0] },
+      ck_mb: { direction: "high", range: [25, 100] },
+      bnp: { direction: "high", range: [200, 2000] },
+      ecg: { value: "Diffuse ST elevation, T-wave inversion" },
+      echocardiogram: { value: "Global hypokinesis, reduced ejection fraction" },
+      chest_xray: { value: "Mild cardiomegaly" },
+    },
+  },
+
+  // ---- 19. Aortic Stenosis ----
+  {
+    id: "aortic_stenosis",
+    name: "Aortic Stenosis",
+    chiefComplaints: ["exertional syncope", "chest pain on exertion", "shortness of breath on exertion"],
+    organSystem: "cardiovascular",
+    severity: "severe",
+    keywords: ["aortic stenosis", "valve stenosis", "calcific aortic valve", "as"],
+    patterns: [],
+    overrides: {
+      echocardiogram: { value: "Calcified aortic valve, reduced valve area, elevated gradient" },
+      heart_auscultation: { value: "Ejection systolic murmur radiating to carotids, slow-rising pulse" },
+      ecg: { value: "Left ventricular hypertrophy with strain pattern" },
+      bnp: { direction: "high", range: [200, 1500] },
+      chest_xray: { value: "Calcified aortic valve, possible cardiomegaly" },
     },
   },
 ];
