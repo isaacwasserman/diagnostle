@@ -11,6 +11,8 @@ import {
   anemia,
   microcyticAnemia,
   macrocyticAnemia,
+  dic,
+  severeInfection,
 } from "../patterns";
 
 export const diseases: DiseaseDef[] = [
@@ -23,7 +25,9 @@ export const diseases: DiseaseDef[] = [
     severity: "severe",
     keywords: ["aki", "acute kidney injury", "acute renal failure", "oliguria"],
     patterns: [acuteRenalFailure],
-    overrides: {},
+    overrides: {
+      magnesium: { direction: "high", range: [2.5, 4.0] },
+    },
   },
   {
     id: "chronic_kidney_disease",
@@ -33,7 +37,11 @@ export const diseases: DiseaseDef[] = [
     severity: "moderate",
     keywords: ["ckd", "chronic kidney disease", "chronic renal failure", "uremia"],
     patterns: [chronicRenalFailure],
-    overrides: {},
+    overrides: {
+      magnesium: { direction: "high", range: [2.3, 3.5] },
+      ferritin: { direction: "low", range: [10, 20] },
+      reticulocyte_count: { direction: "low", range: [0.2, 0.5] },
+    },
   },
   {
     id: "urinary_tract_infection",
@@ -62,6 +70,7 @@ export const diseases: DiseaseDef[] = [
       ct_abdomen: { value: "Ureteric calculus identified with proximal hydronephrosis" },
       creatinine: { direction: "high", range: [1.3, 2.5] },
       calcium: { direction: "high", range: [10.6, 12] },
+      uric_acid: { direction: "high", range: [7.5, 12] },
     },
   },
   {
@@ -116,6 +125,8 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       wbc: { direction: "low", range: [1.0, 3.5] },
       platelets: { direction: "low", range: [10, 50] },
+      reticulocyte_count: { direction: "low", range: [0.05, 0.3] },
+      peripheral_blood_smear: { value: "Pancytopenia, reduced cellularity" },
     },
   },
   {
@@ -124,9 +135,11 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["fatigue", "shortness of breath", "pallor", "pica"],
     organSystem: "hematological",
     severity: "moderate",
-    keywords: ["iron deficiency", "microcytic anemia", "ferritin low"],
+    keywords: ["iron deficiency", "microcytic anaemia", "microcytic anemia", "ferritin low"],
     patterns: [microcyticAnemia],
-    overrides: {},
+    overrides: {
+      peripheral_blood_smear: { value: "Microcytic, hypochromic red cells, pencil cells" },
+    },
   },
   {
     id: "b12_folate_deficiency_anemia",
@@ -149,6 +162,9 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       bilirubin: { direction: "high", range: [2, 8] },
       lactate: { direction: "high", range: [2.5, 5] },
+      reticulocyte_count: { direction: "high", range: [3, 15] },
+      peripheral_blood_smear: { value: "Sickle cells, target cells, Howell-Jolly bodies" },
+      ferritin: { direction: "high", range: [300, 2000] },
     },
   },
   {
@@ -161,6 +177,9 @@ export const diseases: DiseaseDef[] = [
     patterns: [microcyticAnemia],
     overrides: {
       bilirubin: { direction: "high", range: [1.5, 5] },
+      reticulocyte_count: { direction: "high", range: [3, 10] },
+      ferritin: { direction: "high", range: [300, 3000] },
+      peripheral_blood_smear: { value: "Target cells, basophilic stippling, microcytic hypochromic cells" },
     },
   },
   {
@@ -174,7 +193,9 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       aptt: { direction: "high", range: [45, 100] },
       hemoglobin: { direction: "low", range: [8, 11.5] },
-      skin_exam: { value: "Multiple bruises in varying stages, hemarthrosis of joints" },
+      skin_exam: { value: "Multiple bruises in varying stages, haemarthrosis of joints" },
+      fibrinogen: { direction: "high", range: [200, 400] },
+      musculoskeletal_exam: { value: "Joint swelling (haemarthrosis), reduced range of motion" },
     },
   },
   {
@@ -190,6 +211,9 @@ export const diseases: DiseaseDef[] = [
       rbc: { direction: "high", range: [6.0, 8.5] },
       hematocrit: { direction: "high", range: [52, 70] },
       platelets: { direction: "high", range: [400, 800] },
+      uric_acid: { direction: "high", range: [8, 14] },
+      ldh: { direction: "high", range: [280, 500] },
+      peripheral_blood_smear: { value: "Erythrocytosis, possible basophilia" },
     },
   },
 
@@ -340,6 +364,7 @@ export const diseases: DiseaseDef[] = [
     patterns: [malignancy],
     overrides: {
       tsh: { direction: "low", range: [0.1, 0.35] },
+      thyroid_exam: { value: "Hard, fixed thyroid nodule, possible cervical lymphadenopathy" },
     },
   },
   {
@@ -404,6 +429,9 @@ export const diseases: DiseaseDef[] = [
     patterns: [autoimmune],
     overrides: {
       platelets: { direction: "high", range: [400, 600] },
+      ferritin: { direction: "high", range: [250, 1000] },
+      musculoskeletal_exam: { value: "Symmetrical joint swelling, boggy synovitis of MCPs and PIPs" },
+      x_ray_spine: { value: "Periarticular osteopenia, joint space narrowing, erosions" },
     },
   },
   {
@@ -427,6 +455,8 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       wbc: { direction: "high", range: [11, 15] },
       chest_xray: { value: "No acute cardiopulmonary abnormality" },
+      x_ray_spine: { value: "Sacroiliitis, syndesmophytes, bamboo spine appearance" },
+      musculoskeletal_exam: { value: "Reduced spinal mobility, Schober's test positive, loss of lumbar lordosis" },
     },
     remove: ["chest_xray"],
   },
@@ -440,6 +470,8 @@ export const diseases: DiseaseDef[] = [
     patterns: [acuteInflammation],
     overrides: {
       urine_dipstick: { value: "Leukocytes +, no nitrites" },
+      musculoskeletal_exam: { value: "Asymmetric oligoarthritis, dactylitis" },
+      joint_aspiration: { value: "Inflammatory fluid, no crystals, sterile culture" },
     },
   },
   {
@@ -452,6 +484,8 @@ export const diseases: DiseaseDef[] = [
     patterns: [chronicInflammation],
     overrides: {
       skin_exam: { value: "Psoriatic plaques with silvery scale" },
+      musculoskeletal_exam: { value: "Dactylitis (sausage digits), enthesitis, DIP joint swelling" },
+      x_ray_spine: { value: "Pencil-in-cup deformity, periostitis" },
     },
   },
   {
@@ -465,6 +499,8 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       crp: { direction: "high", range: [30, 120] },
       esr: { direction: "high", range: [50, 120] },
+      musculoskeletal_exam: { value: "Bilateral shoulder and hip tenderness, reduced active range of motion" },
+      ferritin: { direction: "high", range: [300, 1000] },
     },
   },
   {
@@ -540,6 +576,8 @@ export const diseases: DiseaseDef[] = [
       platelets: { direction: "low", range: [80, 140] },
       alt: { direction: "high", range: [60, 300] },
       creatinine: { direction: "high", range: [1.3, 2.0] },
+      uric_acid: { direction: "high", range: [6, 10] },
+      ldh: { direction: "high", range: [300, 600] },
     },
   },
   {
@@ -609,7 +647,233 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       calcium: { direction: "low", range: [7.5, 8.4] },
       alp: { direction: "high", range: [150, 300] },
+      phosphate: { direction: "low", range: [1.8, 2.4] },
       chest_xray: { value: "Vertebral compression fractures" },
+      x_ray_spine: { value: "Osteopenia, vertebral compression fractures" },
+    },
+  },
+
+  // ========== NEW: RENAL ==========
+  {
+    id: "nephrotic_syndrome",
+    name: "Nephrotic syndrome",
+    chiefComplaints: ["severe oedema", "frothy urine", "fatigue"],
+    organSystem: "renal",
+    severity: "moderate",
+    keywords: ["nephrotic syndrome", "proteinuria", "oedema", "hypoalbuminaemia"],
+    patterns: [],
+    overrides: {
+      albumin: { direction: "low", range: [1.5, 2.8] },
+      creatinine: { direction: "high", range: [1.2, 2.5] },
+      urine_dipstick: { value: "Protein ++++, lipid casts" },
+      esr: { direction: "high", range: [40, 100] },
+      d_dimer: { direction: "high", range: [0.5, 3] },
+    },
+  },
+  {
+    id: "glomerulonephritis",
+    name: "Glomerulonephritis",
+    chiefComplaints: ["blood in urine", "facial swelling", "reduced urine output"],
+    organSystem: "renal",
+    severity: "severe",
+    keywords: ["glomerulonephritis", "gn", "nephritis", "nephritic syndrome"],
+    patterns: [acuteRenalFailure],
+    overrides: {
+      urine_dipstick: { value: "Blood +++, protein ++, red cell casts" },
+      bp_systolic: { direction: "high", range: [150, 190] },
+      albumin: { direction: "low", range: [2.0, 3.2] },
+      crp: { direction: "high", range: [20, 80] },
+    },
+  },
+
+  // ========== NEW: HAEMATOLOGICAL ==========
+  {
+    id: "haemolytic_anaemia",
+    name: "Haemolytic anaemia",
+    chiefComplaints: ["jaundice", "fatigue", "dark urine"],
+    organSystem: "haematological",
+    severity: "moderate",
+    keywords: ["haemolytic anaemia", "haemolysis", "coombs positive", "autoimmune haemolysis"],
+    patterns: [anemia],
+    overrides: {
+      bilirubin: { direction: "high", range: [2, 10] },
+      ldh: { direction: "high", range: [400, 1500] },
+      reticulocyte_count: { direction: "high", range: [5, 20] },
+      peripheral_blood_smear: { value: "Spherocytes, polychromasia, possible schistocytes" },
+      ferritin: { direction: "high", range: [300, 1500] },
+      urine_dipstick: { value: "Haemoglobin positive, no RBCs" },
+    },
+  },
+  {
+    id: "itp",
+    name: "Immune thrombocytopenic purpura (ITP)",
+    chiefComplaints: ["petechiae", "easy bruising", "mucosal bleeding"],
+    organSystem: "haematological",
+    severity: "moderate",
+    keywords: ["itp", "immune thrombocytopenia", "idiopathic thrombocytopenic purpura"],
+    patterns: [],
+    overrides: {
+      platelets: { direction: "low", range: [5, 50] },
+      skin_exam: { value: "Petechiae, purpura, ecchymoses" },
+      peripheral_blood_smear: { value: "Isolated thrombocytopenia, large platelets (megathrombocytes)" },
+    },
+  },
+  {
+    id: "ttp",
+    name: "Thrombotic thrombocytopenic purpura (TTP)",
+    chiefComplaints: ["confusion with purpura", "fever with bruising", "jaundice"],
+    organSystem: "haematological",
+    severity: "critical",
+    keywords: ["ttp", "thrombotic thrombocytopenic purpura", "adamts13", "microangiopathy"],
+    patterns: [],
+    overrides: {
+      platelets: { direction: "low", range: [5, 40] },
+      haemoglobin: { direction: "low", range: [5, 9] },
+      ldh: { direction: "high", range: [500, 3000] },
+      bilirubin: { direction: "high", range: [2, 8] },
+      creatinine: { direction: "high", range: [1.5, 4.0] },
+      reticulocyte_count: { direction: "high", range: [5, 15] },
+      peripheral_blood_smear: { value: "Schistocytes (fragmented red cells), thrombocytopenia" },
+      gcs: { direction: "low", range: [10, 14] },
+      temperature: { direction: "high", range: [38, 39.5] },
+      skin_exam: { value: "Purpura, petechiae" },
+    },
+  },
+
+  // ========== NEW: AUTOIMMUNE ==========
+  {
+    id: "giant_cell_arteritis",
+    name: "Giant cell arteritis",
+    chiefComplaints: ["temporal headache", "jaw claudication", "sudden visual loss"],
+    organSystem: "autoimmune",
+    severity: "severe",
+    keywords: ["giant cell arteritis", "gca", "temporal arteritis", "cranial arteritis"],
+    patterns: [chronicInflammation],
+    overrides: {
+      crp: { direction: "high", range: [50, 200] },
+      esr: { direction: "high", range: [60, 120] },
+      platelets: { direction: "high", range: [400, 700] },
+      ferritin: { direction: "high", range: [300, 1500] },
+    },
+  },
+  {
+    id: "systemic_sclerosis",
+    name: "Systemic sclerosis (scleroderma)",
+    chiefComplaints: ["Raynaud's phenomenon", "skin thickening", "difficulty swallowing"],
+    organSystem: "autoimmune",
+    severity: "moderate",
+    keywords: ["scleroderma", "systemic sclerosis", "crest syndrome", "raynaud"],
+    patterns: [autoimmune],
+    overrides: {
+      skin_exam: { value: "Skin thickening and tightening, sclerodactyly, telangiectasia" },
+      creatinine: { direction: "high", range: [1.3, 3.0] },
+      spirometry: { value: "Restrictive pattern — reduced FVC" },
+      ct_chest: { value: "Interstitial lung disease, ground-glass opacities" },
+    },
+  },
+  {
+    id: "dermatomyositis",
+    name: "Dermatomyositis",
+    chiefComplaints: ["proximal muscle weakness", "heliotrope rash", "difficulty climbing stairs"],
+    organSystem: "autoimmune",
+    severity: "moderate",
+    keywords: ["dermatomyositis", "inflammatory myopathy", "gottron", "heliotrope"],
+    patterns: [chronicInflammation],
+    overrides: {
+      ldh: { direction: "high", range: [300, 800] },
+      skin_exam: { value: "Heliotrope rash around eyes, Gottron's papules on knuckles" },
+      musculoskeletal_exam: { value: "Proximal muscle weakness, unable to rise from chair" },
+    },
+  },
+
+  // ========== NEW: MUSCULOSKELETAL ==========
+  {
+    id: "osteoarthritis",
+    name: "Osteoarthritis",
+    chiefComplaints: ["joint pain worse with activity", "joint stiffness", "reduced mobility"],
+    organSystem: "musculoskeletal",
+    severity: "mild",
+    keywords: ["osteoarthritis", "oa", "degenerative joint disease", "wear and tear"],
+    patterns: [],
+    overrides: {
+      musculoskeletal_exam: { value: "Bony joint enlargement, crepitus, reduced range of motion" },
+      x_ray_spine: { value: "Joint space narrowing, osteophytes, subchondral sclerosis" },
+      esr: { direction: "high", range: [20, 40] },
+      joint_aspiration: { value: "Non-inflammatory fluid, no crystals, viscous" },
+    },
+  },
+  {
+    id: "septic_arthritis",
+    name: "Septic arthritis",
+    chiefComplaints: ["hot swollen joint", "fever", "inability to weight bear"],
+    organSystem: "musculoskeletal",
+    severity: "severe",
+    keywords: ["septic arthritis", "joint infection", "pyogenic arthritis"],
+    patterns: [bacterialInfection],
+    overrides: {
+      joint_aspiration: { value: "Turbid fluid, WCC >50,000, organisms on Gram stain" },
+      musculoskeletal_exam: { value: "Hot, swollen, erythematous joint held in flexion, severe pain on passive movement" },
+      uric_acid: { direction: "high", range: [3.5, 7.2] },
+    },
+    remove: ["uric_acid"],
+  },
+  {
+    id: "rhabdomyolysis",
+    name: "Rhabdomyolysis",
+    chiefComplaints: ["severe muscle pain", "dark brown urine", "muscle weakness"],
+    organSystem: "musculoskeletal",
+    severity: "severe",
+    keywords: ["rhabdomyolysis", "myoglobin", "crush injury", "muscle breakdown"],
+    patterns: [acuteRenalFailure],
+    overrides: {
+      ck_mb: { direction: "high", range: [1000, 50000] },
+      ldh: { direction: "high", range: [500, 3000] },
+      potassium: { direction: "high", range: [5.5, 8.0] },
+      phosphate: { direction: "high", range: [5.0, 10.0] },
+      calcium: { direction: "low", range: [5.0, 7.5] },
+      urine_dipstick: { value: "Blood +++ (myoglobinuria), no RBCs on microscopy" },
+      musculoskeletal_exam: { value: "Diffuse muscle tenderness, swelling, weakness" },
+    },
+  },
+
+  // ========== NEW: ENVIRONMENTAL ==========
+  {
+    id: "heatstroke",
+    name: "Heatstroke",
+    chiefComplaints: ["collapse in heat", "confusion", "hot dry skin"],
+    organSystem: "immunological",
+    severity: "critical",
+    keywords: ["heatstroke", "heat exhaustion", "hyperthermia", "heat illness"],
+    patterns: [],
+    overrides: {
+      temperature: { direction: "high", range: [40, 42.5] },
+      gcs: { direction: "low", range: [8, 13] },
+      heart_rate: { direction: "high", range: [120, 160] },
+      bp_systolic: { direction: "low", range: [70, 90] },
+      creatinine: { direction: "high", range: [1.5, 4.0] },
+      alt: { direction: "high", range: [60, 1000] },
+      ast: { direction: "high", range: [50, 800] },
+      lactate: { direction: "high", range: [3, 10] },
+      sodium: { direction: "high", range: [148, 160] },
+      skin_exam: { value: "Hot, dry, flushed skin, absence of sweating" },
+    },
+  },
+  {
+    id: "hypothermia",
+    name: "Hypothermia",
+    chiefComplaints: ["cold exposure", "confusion", "shivering"],
+    organSystem: "immunological",
+    severity: "severe",
+    keywords: ["hypothermia", "exposure", "cold injury", "core temperature"],
+    patterns: [],
+    overrides: {
+      temperature: { direction: "low", range: [28, 35] },
+      heart_rate: { direction: "low", range: [30, 55] },
+      bp_systolic: { direction: "low", range: [70, 90] },
+      gcs: { direction: "low", range: [8, 14] },
+      glucose: { direction: "low", range: [40, 65] },
+      ecg: { value: "Osborn (J) waves, sinus bradycardia, possible atrial fibrillation" },
+      skin_exam: { value: "Cold, pale skin, possible frostbite of extremities" },
     },
   },
 ];

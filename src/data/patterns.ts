@@ -18,6 +18,7 @@ export const bacterialInfection: LabPattern = {
     temperature: { direction: "high", range: [38.5, 40.5] },
     heart_rate: { direction: "high", range: [100, 130] },
     procalcitonin: { direction: "high", range: [2, 50] },
+    ferritin: { direction: "high", range: [300, 1500] },
     blood_cultures: { value: "Positive — organism identified" },
   },
 };
@@ -53,6 +54,7 @@ export const hepatocellularDamage: LabPattern = {
     bilirubin: { direction: "high", range: [2, 15] },
     albumin: { direction: "low", range: [1.5, 3.2] },
     pt_inr: { direction: "high", range: [1.3, 2.5] },
+    ldh: { direction: "high", range: [300, 800] },
   },
 };
 
@@ -63,6 +65,7 @@ export const cholestatic: LabPattern = {
     bilirubin: { direction: "high", range: [3, 25] },
     alt: { direction: "high", range: [40, 150] },
     ast: { direction: "high", range: [35, 120] },
+    ggt: { direction: "high", range: [80, 400] },
   },
 };
 
@@ -75,6 +78,7 @@ export const chronicLiver: LabPattern = {
     bilirubin: { direction: "high", range: [1.5, 8] },
     pt_inr: { direction: "high", range: [1.2, 2.0] },
     platelets: { direction: "low", range: [60, 140] },
+    ggt: { direction: "high", range: [50, 300] },
   },
 };
 
@@ -85,6 +89,7 @@ export const acuteCardiacInjury: LabPattern = {
   abnormals: {
     troponin: { direction: "high", range: [0.1, 15] },
     ck_mb: { direction: "high", range: [25, 300] },
+    ldh: { direction: "high", range: [300, 600] },
     ecg: { value: "ST-segment changes" },
   },
 };
@@ -117,6 +122,8 @@ export const acuteRenalFailure: LabPattern = {
     bun: { direction: "high", range: [30, 80] },
     potassium: { direction: "high", range: [5.5, 7.0] },
     bicarbonate: { direction: "low", range: [12, 20] },
+    phosphate: { direction: "high", range: [5.0, 8.0] },
+    uric_acid: { direction: "high", range: [8, 15] },
   },
 };
 
@@ -129,6 +136,8 @@ export const chronicRenalFailure: LabPattern = {
     calcium: { direction: "low", range: [6.5, 8.0] },
     hemoglobin: { direction: "low", range: [7, 11] },
     bicarbonate: { direction: "low", range: [15, 21] },
+    phosphate: { direction: "high", range: [4.8, 7.0] },
+    uric_acid: { direction: "high", range: [7.5, 12] },
   },
 };
 
@@ -141,6 +150,7 @@ export const dic: LabPattern = {
     pt_inr: { direction: "high", range: [1.8, 4.0] },
     aptt: { direction: "high", range: [45, 90] },
     d_dimer: { direction: "high", range: [4, 20] },
+    fibrinogen: { direction: "low", range: [50, 150] },
   },
 };
 
@@ -168,6 +178,7 @@ export const obstructiveAirway: LabPattern = {
     spo2: { direction: "low", range: [88, 94] },
     lung_auscultation: { value: "Widespread wheeze" },
     chest_xray: { value: "Hyperinflated lungs" },
+    spirometry: { value: "Obstructive pattern — reduced FEV1/FVC ratio" },
   },
 };
 
@@ -180,6 +191,7 @@ export const anemia: LabPattern = {
     rbc: { direction: "low", range: [2.5, 4.0] },
     hematocrit: { direction: "low", range: [20, 35] },
     heart_rate: { direction: "high", range: [90, 120] },
+    ldh: { direction: "high", range: [280, 500] },
   },
 };
 
@@ -188,6 +200,8 @@ export const microcyticAnemia: LabPattern = {
   abnormals: {
     ...anemia.abnormals,
     mcv: { direction: "low", range: [55, 78] },
+    ferritin: { direction: "low", range: [3, 18] },
+    reticulocyte_count: { direction: "low", range: [0.1, 0.4] },
   },
 };
 
@@ -196,6 +210,8 @@ export const macrocyticAnemia: LabPattern = {
   abnormals: {
     ...anemia.abnormals,
     mcv: { direction: "high", range: [101, 130] },
+    reticulocyte_count: { direction: "low", range: [0.1, 0.4] },
+    peripheral_blood_smear: { value: "Megaloblasts, hypersegmented neutrophils" },
   },
 };
 
@@ -215,6 +231,7 @@ export const metabolicAcidosis: LabPattern = {
     bicarbonate: { direction: "low", range: [8, 18] },
     potassium: { direction: "high", range: [5.0, 7.0] },
     respiratory_rate: { direction: "high", range: [22, 36] },
+    phosphate: { direction: "low", range: [1.0, 2.3] },
   },
 };
 
@@ -247,6 +264,8 @@ export const malignancy: LabPattern = {
     hemoglobin: { direction: "low", range: [8, 11.5] },
     esr: { direction: "high", range: [40, 100] },
     calcium: { direction: "high", range: [10.8, 14] },
+    ldh: { direction: "high", range: [300, 800] },
+    ferritin: { direction: "high", range: [300, 2000] },
   },
 };
 
@@ -258,6 +277,9 @@ export const leukemia: LabPattern = {
     platelets: { direction: "low", range: [10, 80] },
     esr: { direction: "high", range: [50, 120] },
     lactate: { direction: "high", range: [2.5, 6] },
+    ldh: { direction: "high", range: [400, 2000] },
+    uric_acid: { direction: "high", range: [8, 18] },
+    peripheral_blood_smear: { value: "Blast cells identified" },
   },
 };
 

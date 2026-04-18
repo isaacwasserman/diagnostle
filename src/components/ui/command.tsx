@@ -23,7 +23,7 @@ function Command({
     <CommandPrimitive
       data-slot="command"
       className={cn(
-        "flex size-full flex-col overflow-hidden rounded-4xl bg-popover p-1 text-popover-foreground",
+        "flex size-full min-h-0 flex-col overflow-hidden rounded-4xl bg-popover p-1 text-popover-foreground",
         className
       )}
       {...props}
@@ -68,7 +68,7 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div data-slot="command-input-wrapper" className="p-1 pb-0">
+    <div data-slot="command-input-wrapper" className="p-1 pb-2">
       <InputGroup className="h-9 bg-input/30">
         <CommandPrimitive.Input
           data-slot="command-input"
@@ -94,7 +94,7 @@ function CommandList({
     <CommandPrimitive.List
       data-slot="command-list"
       className={cn(
-        "no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none",
+        "no-scrollbar flex-1 min-h-0 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none",
         className
       )}
       {...props}
@@ -153,7 +153,7 @@ function CommandItem({
     <CommandPrimitive.Item
       data-slot="command-item"
       className={cn(
-        "group/command-item relative flex cursor-default items-center gap-2 rounded-lg px-3 py-2 text-sm outline-hidden select-none in-data-[slot=dialog-content]:rounded-2xl data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
+        "group/command-item relative flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-sm outline-hidden select-none in-data-[slot=dialog-content]:rounded-2xl data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
         className
       )}
       {...props}

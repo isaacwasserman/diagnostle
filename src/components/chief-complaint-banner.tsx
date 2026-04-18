@@ -23,11 +23,11 @@ export function ChiefComplaintBanner({ complaint, dateStr }: Props) {
           {displayDate}
         </p>
       </div>
-      <div className="flex items-start gap-3">
-        <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-white/20">
+      <div className="flex items-center gap-3">
+        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/20">
           <Stethoscope className="size-4 text-primary-foreground" />
         </div>
-        <p className="text-base sm:text-lg font-semibold text-primary-foreground mt-0.5 leading-snug">
+        <p className="text-base sm:text-lg font-semibold text-primary-foreground leading-snug">
           &ldquo;{complaint}&rdquo;
         </p>
       </div>

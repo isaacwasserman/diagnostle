@@ -62,7 +62,7 @@ export function TestSelector({ availableTests, onSelectTest, disabled }: Props) 
   const isSearching = search.trim().length > 0;
 
   return (
-    <Card className="overflow-hidden py-1">
+    <Card className="overflow-hidden py-1 flex-1 flex flex-col min-h-72 h-0">
       <Command>
         <CommandInput
           placeholder="Search tests..."
