@@ -1,24 +1,29 @@
-import type { DiseaseDef } from "../types";
 import {
-  acuteRenalFailure,
-  chronicRenalFailure,
-  bacterialInfection,
   acuteInflammation,
-  chronicInflammation,
-  autoimmune,
-  malignancy,
-  leukemia,
+  acuteRenalFailure,
   anemia,
-  microcyticAnemia,
+  autoimmune,
+  bacterialInfection,
+  chronicInflammation,
+  chronicRenalFailure,
+  leukemia,
   macrocyticAnemia,
-} from "../patterns";
+  malignancy,
+  microcyticAnemia,
+} from "../patterns"
+import type { DiseaseDef } from "../types"
 
 export const diseases: DiseaseDef[] = [
   // ========== RENAL ==========
   {
     id: "acute_kidney_injury",
     name: "Acute kidney injury",
-    chiefComplaints: ["reduced urine output", "swelling", "nausea", "confusion"],
+    chiefComplaints: [
+      "reduced urine output",
+      "swelling",
+      "nausea",
+      "confusion",
+    ],
     organSystem: "renal",
     severity: "severe",
     keywords: ["aki", "acute kidney injury", "acute renal failure", "oliguria"],
@@ -31,14 +36,23 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["fatigue", "swelling", "nausea", "itch"],
     organSystem: "renal",
     severity: "moderate",
-    keywords: ["ckd", "chronic kidney disease", "chronic renal failure", "uremia"],
+    keywords: [
+      "ckd",
+      "chronic kidney disease",
+      "chronic renal failure",
+      "uremia",
+    ],
     patterns: [chronicRenalFailure],
     overrides: {},
   },
   {
     id: "urinary_tract_infection",
     name: "Urinary tract infection",
-    chiefComplaints: ["burning on urination", "frequent urination", "lower abdominal pain"],
+    chiefComplaints: [
+      "burning on urination",
+      "frequent urination",
+      "lower abdominal pain",
+    ],
     organSystem: "renal",
     severity: "mild",
     keywords: ["uti", "cystitis", "urinary infection", "dysuria"],
@@ -52,14 +66,25 @@ export const diseases: DiseaseDef[] = [
   {
     id: "kidney_stones",
     name: "Kidney stones",
-    chiefComplaints: ["severe flank pain", "blood in urine", "nausea and vomiting"],
+    chiefComplaints: [
+      "severe flank pain",
+      "blood in urine",
+      "nausea and vomiting",
+    ],
     organSystem: "renal",
     severity: "moderate",
-    keywords: ["kidney stones", "renal calculi", "nephrolithiasis", "ureteric colic"],
+    keywords: [
+      "kidney stones",
+      "renal calculi",
+      "nephrolithiasis",
+      "ureteric colic",
+    ],
     patterns: [],
     overrides: {
       urine_dipstick: { value: "Blood ++, no nitrites" },
-      ct_abdomen: { value: "Ureteric calculus identified with proximal hydronephrosis" },
+      ct_abdomen: {
+        value: "Ureteric calculus identified with proximal hydronephrosis",
+      },
       creatinine: { direction: "high", range: [1.3, 2.5] },
       calcium: { direction: "high", range: [10.6, 12] },
     },
@@ -80,20 +105,31 @@ export const diseases: DiseaseDef[] = [
   {
     id: "kidney_cancer",
     name: "Kidney cancer",
-    chiefComplaints: ["blood in urine", "flank pain", "weight loss", "palpable mass"],
+    chiefComplaints: [
+      "blood in urine",
+      "flank pain",
+      "weight loss",
+      "palpable mass",
+    ],
     organSystem: "renal",
     severity: "severe",
     keywords: ["kidney cancer", "renal cell carcinoma", "rcc"],
     patterns: [malignancy],
     overrides: {
-      ct_abdomen: { value: "Renal mass with enhancement, suspicious for malignancy" },
+      ct_abdomen: {
+        value: "Renal mass with enhancement, suspicious for malignancy",
+      },
       urine_dipstick: { value: "Blood ++, no nitrites" },
     },
   },
   {
     id: "bladder_cancer",
     name: "Bladder cancer",
-    chiefComplaints: ["painless blood in urine", "frequent urination", "pelvic pain"],
+    chiefComplaints: [
+      "painless blood in urine",
+      "frequent urination",
+      "pelvic pain",
+    ],
     organSystem: "renal",
     severity: "severe",
     keywords: ["bladder cancer", "transitional cell carcinoma", "urothelial"],
@@ -108,7 +144,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "aplastic_anemia",
     name: "Aplastic anemia",
-    chiefComplaints: ["fatigue", "recurrent infections", "easy bruising", "shortness of breath"],
+    chiefComplaints: [
+      "fatigue",
+      "recurrent infections",
+      "easy bruising",
+      "shortness of breath",
+    ],
     organSystem: "hematological",
     severity: "severe",
     keywords: ["aplastic anemia", "bone marrow failure", "pancytopenia"],
@@ -131,17 +172,32 @@ export const diseases: DiseaseDef[] = [
   {
     id: "b12_folate_deficiency_anemia",
     name: "Vitamin B12/folate deficiency anemia",
-    chiefComplaints: ["fatigue", "tingling in hands and feet", "sore tongue", "cognitive changes"],
+    chiefComplaints: [
+      "fatigue",
+      "tingling in hands and feet",
+      "sore tongue",
+      "cognitive changes",
+    ],
     organSystem: "hematological",
     severity: "moderate",
-    keywords: ["b12 deficiency", "folate deficiency", "macrocytic anemia", "megaloblastic"],
+    keywords: [
+      "b12 deficiency",
+      "folate deficiency",
+      "macrocytic anemia",
+      "megaloblastic",
+    ],
     patterns: [macrocyticAnemia],
     overrides: {},
   },
   {
     id: "sickle_cell_disease",
     name: "Sickle cell disease",
-    chiefComplaints: ["severe bone pain", "fatigue", "jaundice", "recurrent infections"],
+    chiefComplaints: [
+      "severe bone pain",
+      "fatigue",
+      "jaundice",
+      "recurrent infections",
+    ],
     organSystem: "hematological",
     severity: "severe",
     keywords: ["sickle cell", "hbss", "vaso-occlusive crisis", "sickling"],
@@ -157,7 +213,12 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["fatigue", "pallor", "bone deformities", "growth delay"],
     organSystem: "hematological",
     severity: "moderate",
-    keywords: ["thalassemia", "thalassemia", "hemoglobin disorder", "mediterranean anemia"],
+    keywords: [
+      "thalassemia",
+      "thalassemia",
+      "hemoglobin disorder",
+      "mediterranean anemia",
+    ],
     patterns: [microcyticAnemia],
     overrides: {
       bilirubin: { direction: "high", range: [1.5, 5] },
@@ -174,13 +235,20 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       aptt: { direction: "high", range: [45, 100] },
       hemoglobin: { direction: "low", range: [8, 11.5] },
-      skin_exam: { value: "Multiple bruises in varying stages, hemarthrosis of joints" },
+      skin_exam: {
+        value: "Multiple bruises in varying stages, hemarthrosis of joints",
+      },
     },
   },
   {
     id: "polycythemia",
     name: "Polycythemia",
-    chiefComplaints: ["headache", "dizziness", "itching after bathing", "ruddy complexion"],
+    chiefComplaints: [
+      "headache",
+      "dizziness",
+      "itching after bathing",
+      "ruddy complexion",
+    ],
     organSystem: "hematological",
     severity: "moderate",
     keywords: ["polycythemia", "polycythemia vera", "erythrocytosis"],
@@ -209,7 +277,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "prostate_cancer",
     name: "Prostate cancer",
-    chiefComplaints: ["difficulty urinating", "frequent urination at night", "bone pain"],
+    chiefComplaints: [
+      "difficulty urinating",
+      "frequent urination at night",
+      "bone pain",
+    ],
     organSystem: "cancer",
     severity: "severe",
     keywords: ["prostate cancer", "prostate carcinoma", "psa"],
@@ -221,7 +293,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "all",
     name: "Acute lymphoblastic leukemia (ALL)",
-    chiefComplaints: ["fatigue", "easy bruising", "recurrent infections", "bone pain"],
+    chiefComplaints: [
+      "fatigue",
+      "easy bruising",
+      "recurrent infections",
+      "bone pain",
+    ],
     organSystem: "hematological",
     severity: "critical",
     keywords: ["all", "acute lymphoblastic leukemia", "lymphoblast"],
@@ -231,7 +308,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "aml",
     name: "Acute myeloid leukemia (AML)",
-    chiefComplaints: ["fatigue", "easy bruising", "recurrent infections", "gum bleeding"],
+    chiefComplaints: [
+      "fatigue",
+      "easy bruising",
+      "recurrent infections",
+      "gum bleeding",
+    ],
     organSystem: "hematological",
     severity: "critical",
     keywords: ["aml", "acute myeloid leukemia", "myeloblast"],
@@ -241,7 +323,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "cll",
     name: "Chronic lymphocytic leukemia (CLL)",
-    chiefComplaints: ["fatigue", "lymph node swelling", "recurrent infections", "weight loss"],
+    chiefComplaints: [
+      "fatigue",
+      "lymph node swelling",
+      "recurrent infections",
+      "weight loss",
+    ],
     organSystem: "hematological",
     severity: "moderate",
     keywords: ["cll", "chronic lymphocytic leukemia", "lymphocytosis"],
@@ -253,7 +340,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "cml",
     name: "Chronic myeloid leukemia (CML)",
-    chiefComplaints: ["fatigue", "weight loss", "night sweats", "abdominal fullness"],
+    chiefComplaints: [
+      "fatigue",
+      "weight loss",
+      "night sweats",
+      "abdominal fullness",
+    ],
     organSystem: "hematological",
     severity: "moderate",
     keywords: ["cml", "chronic myeloid leukemia", "philadelphia chromosome"],
@@ -265,7 +357,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "hodgkin_lymphoma",
     name: "Hodgkin lymphoma",
-    chiefComplaints: ["painless lymph node swelling", "night sweats", "weight loss", "itch"],
+    chiefComplaints: [
+      "painless lymph node swelling",
+      "night sweats",
+      "weight loss",
+      "itch",
+    ],
     organSystem: "hematological",
     severity: "severe",
     keywords: ["hodgkin", "lymphoma", "reed-sternberg", "b symptoms"],
@@ -278,7 +375,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "non_hodgkin_lymphoma",
     name: "Non-Hodgkin lymphoma",
-    chiefComplaints: ["painless lymph node swelling", "night sweats", "weight loss", "fatigue"],
+    chiefComplaints: [
+      "painless lymph node swelling",
+      "night sweats",
+      "weight loss",
+      "fatigue",
+    ],
     organSystem: "hematological",
     severity: "severe",
     keywords: ["non-hodgkin", "nhl", "lymphoma", "b-cell lymphoma"],
@@ -305,7 +407,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "ovarian_cancer",
     name: "Ovarian cancer",
-    chiefComplaints: ["abdominal bloating", "pelvic pain", "difficulty eating", "urinary urgency"],
+    chiefComplaints: [
+      "abdominal bloating",
+      "pelvic pain",
+      "difficulty eating",
+      "urinary urgency",
+    ],
     organSystem: "cancer",
     severity: "severe",
     keywords: ["ovarian cancer", "ovarian carcinoma", "ca-125"],
@@ -318,7 +425,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "liver_cancer",
     name: "Liver cancer",
-    chiefComplaints: ["weight loss", "abdominal pain", "jaundice", "abdominal swelling"],
+    chiefComplaints: [
+      "weight loss",
+      "abdominal pain",
+      "jaundice",
+      "abdominal swelling",
+    ],
     organSystem: "cancer",
     severity: "severe",
     keywords: ["liver cancer", "hepatocellular carcinoma", "hcc"],
@@ -345,7 +457,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "myeloma",
     name: "Myeloma",
-    chiefComplaints: ["bone pain", "fatigue", "recurrent infections", "kidney problems"],
+    chiefComplaints: [
+      "bone pain",
+      "fatigue",
+      "recurrent infections",
+      "kidney problems",
+    ],
     organSystem: "hematological",
     severity: "severe",
     keywords: ["myeloma", "multiple myeloma", "paraprotein", "bence jones"],
@@ -358,7 +475,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "melanoma",
     name: "Melanoma",
-    chiefComplaints: ["changing mole", "new skin lesion", "irregular pigmented lesion"],
+    chiefComplaints: [
+      "changing mole",
+      "new skin lesion",
+      "irregular pigmented lesion",
+    ],
     organSystem: "cancer",
     severity: "severe",
     keywords: ["melanoma", "skin cancer", "malignant mole"],
@@ -370,7 +491,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "testicular_cancer",
     name: "Testicular cancer",
-    chiefComplaints: ["testicular lump", "testicular swelling", "heaviness in scrotum"],
+    chiefComplaints: [
+      "testicular lump",
+      "testicular swelling",
+      "heaviness in scrotum",
+    ],
     organSystem: "cancer",
     severity: "moderate",
     keywords: ["testicular cancer", "seminoma", "teratoma", "germ cell tumor"],
@@ -384,10 +509,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "lupus_sle",
     name: "Lupus (SLE)",
-    chiefComplaints: ["joint pain", "butterfly rash", "fatigue", "mouth ulcers"],
+    chiefComplaints: [
+      "joint pain",
+      "butterfly rash",
+      "fatigue",
+      "mouth ulcers",
+    ],
     organSystem: "autoimmune",
     severity: "moderate",
-    keywords: ["lupus", "sle", "systemic lupus erythematosus", "butterfly rash"],
+    keywords: [
+      "lupus",
+      "sle",
+      "systemic lupus erythematosus",
+      "butterfly rash",
+    ],
     patterns: [autoimmune],
     overrides: {
       creatinine: { direction: "high", range: [1.3, 2.5] },
@@ -397,7 +532,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "rheumatoid_arthritis",
     name: "Rheumatoid arthritis",
-    chiefComplaints: ["joint pain and stiffness", "swollen joints", "morning stiffness", "fatigue"],
+    chiefComplaints: [
+      "joint pain and stiffness",
+      "swollen joints",
+      "morning stiffness",
+      "fatigue",
+    ],
     organSystem: "autoimmune",
     severity: "moderate",
     keywords: ["rheumatoid", "ra", "joint inflammation", "synovitis"],
@@ -419,10 +559,18 @@ export const diseases: DiseaseDef[] = [
   {
     id: "ankylosing_spondylitis",
     name: "Ankylosing spondylitis",
-    chiefComplaints: ["lower back pain", "morning stiffness", "reduced spinal mobility"],
+    chiefComplaints: [
+      "lower back pain",
+      "morning stiffness",
+      "reduced spinal mobility",
+    ],
     organSystem: "autoimmune",
     severity: "moderate",
-    keywords: ["ankylosing spondylitis", "axial spondyloarthritis", "bamboo spine"],
+    keywords: [
+      "ankylosing spondylitis",
+      "axial spondyloarthritis",
+      "bamboo spine",
+    ],
     patterns: [chronicInflammation],
     overrides: {
       wbc: { direction: "high", range: [11, 15] },
@@ -436,7 +584,11 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["joint pain", "eye redness", "urinary symptoms"],
     organSystem: "autoimmune",
     severity: "moderate",
-    keywords: ["reactive arthritis", "reiter syndrome", "post-infectious arthritis"],
+    keywords: [
+      "reactive arthritis",
+      "reiter syndrome",
+      "post-infectious arthritis",
+    ],
     patterns: [acuteInflammation],
     overrides: {
       urine_dipstick: { value: "Leukocytes +, no nitrites" },
@@ -445,7 +597,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "psoriatic_arthritis",
     name: "Psoriatic arthritis",
-    chiefComplaints: ["joint pain", "swollen fingers", "nail changes", "skin plaques"],
+    chiefComplaints: [
+      "joint pain",
+      "swollen fingers",
+      "nail changes",
+      "skin plaques",
+    ],
     organSystem: "autoimmune",
     severity: "moderate",
     keywords: ["psoriatic arthritis", "dactylitis", "enthesitis"],
@@ -457,7 +614,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "polymyalgia_rheumatica",
     name: "Polymyalgia rheumatica",
-    chiefComplaints: ["bilateral shoulder pain", "hip stiffness", "morning stiffness", "fatigue"],
+    chiefComplaints: [
+      "bilateral shoulder pain",
+      "hip stiffness",
+      "morning stiffness",
+      "fatigue",
+    ],
     organSystem: "autoimmune",
     severity: "moderate",
     keywords: ["polymyalgia rheumatica", "pmr", "proximal stiffness"],
@@ -470,10 +632,19 @@ export const diseases: DiseaseDef[] = [
   {
     id: "sarcoidosis",
     name: "Sarcoidosis",
-    chiefComplaints: ["cough", "shortness of breath", "skin lesions", "fatigue"],
+    chiefComplaints: [
+      "cough",
+      "shortness of breath",
+      "skin lesions",
+      "fatigue",
+    ],
     organSystem: "autoimmune",
     severity: "moderate",
-    keywords: ["sarcoidosis", "granulomatous", "bilateral hilar lymphadenopathy"],
+    keywords: [
+      "sarcoidosis",
+      "granulomatous",
+      "bilateral hilar lymphadenopathy",
+    ],
     patterns: [chronicInflammation],
     overrides: {
       calcium: { direction: "high", range: [10.8, 13] },
@@ -491,19 +662,28 @@ export const diseases: DiseaseDef[] = [
     keywords: ["psoriasis", "plaque psoriasis", "silvery scales"],
     patterns: [chronicInflammation],
     overrides: {
-      skin_exam: { value: "Well-demarcated erythematous plaques with silvery scale" },
+      skin_exam: {
+        value: "Well-demarcated erythematous plaques with silvery scale",
+      },
     },
   },
   {
     id: "rosacea",
     name: "Rosacea",
-    chiefComplaints: ["facial redness", "flushing", "visible blood vessels", "spots on face"],
+    chiefComplaints: [
+      "facial redness",
+      "flushing",
+      "visible blood vessels",
+      "spots on face",
+    ],
     organSystem: "dermatological",
     severity: "mild",
     keywords: ["rosacea", "facial flushing", "rhinophyma"],
     patterns: [],
     overrides: {
-      skin_exam: { value: "Central facial erythema, telangiectasia, papules and pustules" },
+      skin_exam: {
+        value: "Central facial erythema, telangiectasia, papules and pustules",
+      },
       crp: { direction: "high", range: [5, 20] },
       esr: { direction: "high", range: [15, 35] },
     },
@@ -513,7 +693,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "ectopic_pregnancy",
     name: "Ectopic pregnancy",
-    chiefComplaints: ["lower abdominal pain", "vaginal bleeding", "shoulder tip pain", "dizziness"],
+    chiefComplaints: [
+      "lower abdominal pain",
+      "vaginal bleeding",
+      "shoulder tip pain",
+      "dizziness",
+    ],
     organSystem: "reproductive",
     severity: "critical",
     keywords: ["ectopic pregnancy", "tubal pregnancy", "ruptured ectopic"],
@@ -522,16 +707,28 @@ export const diseases: DiseaseDef[] = [
       hemoglobin: { direction: "low", range: [7, 11] },
       heart_rate: { direction: "high", range: [100, 130] },
       bp_systolic: { direction: "low", range: [75, 90] },
-      abdominal_ultrasound: { value: "No intrauterine pregnancy, adnexal mass, free fluid" },
+      abdominal_ultrasound: {
+        value: "No intrauterine pregnancy, adnexal mass, free fluid",
+      },
     },
   },
   {
     id: "pre_eclampsia",
     name: "Pre-eclampsia",
-    chiefComplaints: ["headache", "swelling", "visual disturbance", "upper abdominal pain"],
+    chiefComplaints: [
+      "headache",
+      "swelling",
+      "visual disturbance",
+      "upper abdominal pain",
+    ],
     organSystem: "reproductive",
     severity: "severe",
-    keywords: ["pre-eclampsia", "preeclampsia", "pregnancy hypertension", "proteinuria"],
+    keywords: [
+      "pre-eclampsia",
+      "preeclampsia",
+      "pregnancy hypertension",
+      "proteinuria",
+    ],
     patterns: [],
     overrides: {
       bp_systolic: { direction: "high", range: [150, 200] },
@@ -545,25 +742,44 @@ export const diseases: DiseaseDef[] = [
   {
     id: "pelvic_inflammatory_disease",
     name: "Pelvic inflammatory disease",
-    chiefComplaints: ["lower abdominal pain", "vaginal discharge", "fever", "pain during intercourse"],
+    chiefComplaints: [
+      "lower abdominal pain",
+      "vaginal discharge",
+      "fever",
+      "pain during intercourse",
+    ],
     organSystem: "reproductive",
     severity: "moderate",
-    keywords: ["pid", "pelvic inflammatory disease", "salpingitis", "adnexitis"],
+    keywords: [
+      "pid",
+      "pelvic inflammatory disease",
+      "salpingitis",
+      "adnexitis",
+    ],
     patterns: [bacterialInfection],
     overrides: {
-      abdominal_exam: { value: "Lower abdominal tenderness, adnexal tenderness" },
+      abdominal_exam: {
+        value: "Lower abdominal tenderness, adnexal tenderness",
+      },
     },
   },
   {
     id: "endometriosis",
     name: "Endometriosis",
-    chiefComplaints: ["pelvic pain", "painful periods", "pain during intercourse", "difficulty conceiving"],
+    chiefComplaints: [
+      "pelvic pain",
+      "painful periods",
+      "pain during intercourse",
+      "difficulty conceiving",
+    ],
     organSystem: "reproductive",
     severity: "moderate",
     keywords: ["endometriosis", "endometrioma", "chocolate cyst"],
     patterns: [chronicInflammation],
     overrides: {
-      abdominal_ultrasound: { value: "Endometrioma identified, possible deep infiltrating disease" },
+      abdominal_ultrasound: {
+        value: "Endometrioma identified, possible deep infiltrating disease",
+      },
     },
   },
 
@@ -571,10 +787,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "anaphylaxis",
     name: "Anaphylaxis",
-    chiefComplaints: ["swelling of face/throat", "difficulty breathing", "rash", "collapse"],
+    chiefComplaints: [
+      "swelling of face/throat",
+      "difficulty breathing",
+      "rash",
+      "collapse",
+    ],
     organSystem: "immunological",
     severity: "critical",
-    keywords: ["anaphylaxis", "allergic reaction", "anaphylactic shock", "epinephrine"],
+    keywords: [
+      "anaphylaxis",
+      "allergic reaction",
+      "anaphylactic shock",
+      "epinephrine",
+    ],
     patterns: [],
     overrides: {
       heart_rate: { direction: "high", range: [110, 150] },
@@ -587,7 +813,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "obstructive_sleep_apnea",
     name: "Obstructive sleep apnea",
-    chiefComplaints: ["loud snoring", "daytime sleepiness", "witnessed apneas", "morning headache"],
+    chiefComplaints: [
+      "loud snoring",
+      "daytime sleepiness",
+      "witnessed apneas",
+      "morning headache",
+    ],
     organSystem: "respiratory",
     severity: "moderate",
     keywords: ["osa", "obstructive sleep apnea", "sleep apnea", "cpap"],
@@ -612,4 +843,4 @@ export const diseases: DiseaseDef[] = [
       chest_xray: { value: "Vertebral compression fractures" },
     },
   },
-];
+]

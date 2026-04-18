@@ -1,11 +1,11 @@
-import type { DiseaseDef } from "../types";
 import {
-  obstructiveAirway,
-  malignancy,
-  respiratoryDistress,
   acuteInflammation,
   chronicInflammation,
-} from "../patterns";
+  malignancy,
+  obstructiveAirway,
+  respiratoryDistress,
+} from "../patterns"
+import type { DiseaseDef } from "../types"
 
 export const diseases: DiseaseDef[] = [
   {
@@ -21,7 +21,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "copd",
     name: "COPD",
-    chiefComplaints: ["shortness of breath", "chronic cough", "sputum production"],
+    chiefComplaints: [
+      "shortness of breath",
+      "chronic cough",
+      "sputum production",
+    ],
     organSystem: "respiratory",
     severity: "moderate",
     keywords: ["copd", "emphysema", "chronic bronchitis", "smoking"],
@@ -33,7 +37,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "bronchiectasis",
     name: "Bronchiectasis",
-    chiefComplaints: ["chronic cough", "sputum production", "recurrent chest infections"],
+    chiefComplaints: [
+      "chronic cough",
+      "sputum production",
+      "recurrent chest infections",
+    ],
     organSystem: "respiratory",
     severity: "moderate",
     keywords: ["bronchiectasis", "dilated airways", "chronic sputum"],
@@ -47,10 +55,19 @@ export const diseases: DiseaseDef[] = [
   {
     id: "idiopathic_pulmonary_fibrosis",
     name: "Idiopathic pulmonary fibrosis",
-    chiefComplaints: ["progressive shortness of breath", "dry cough", "fatigue"],
+    chiefComplaints: [
+      "progressive shortness of breath",
+      "dry cough",
+      "fatigue",
+    ],
     organSystem: "respiratory",
     severity: "severe",
-    keywords: ["pulmonary fibrosis", "ipf", "interstitial lung disease", "honeycombing"],
+    keywords: [
+      "pulmonary fibrosis",
+      "ipf",
+      "interstitial lung disease",
+      "honeycombing",
+    ],
     patterns: [respiratoryDistress],
     overrides: {
       chest_xray: { value: "Bilateral reticular opacities, honeycombing" },
@@ -60,7 +77,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "pleurisy",
     name: "Pleurisy",
-    chiefComplaints: ["sharp chest pain on breathing", "pleuritic pain", "shortness of breath"],
+    chiefComplaints: [
+      "sharp chest pain on breathing",
+      "pleuritic pain",
+      "shortness of breath",
+    ],
     organSystem: "respiratory",
     severity: "moderate",
     keywords: ["pleurisy", "pleuritis", "pleural inflammation"],
@@ -73,13 +94,19 @@ export const diseases: DiseaseDef[] = [
   {
     id: "pneumothorax",
     name: "Pneumothorax",
-    chiefComplaints: ["sudden chest pain", "shortness of breath", "pleuritic pain"],
+    chiefComplaints: [
+      "sudden chest pain",
+      "shortness of breath",
+      "pleuritic pain",
+    ],
     organSystem: "respiratory",
     severity: "severe",
     keywords: ["pneumothorax", "collapsed lung", "air leak"],
     patterns: [],
     overrides: {
-      chest_xray: { value: "Visible lung edge, absent lung markings peripherally" },
+      chest_xray: {
+        value: "Visible lung edge, absent lung markings peripherally",
+      },
       lung_auscultation: { value: "Absent breath sounds on affected side" },
       spo2: { direction: "low", range: [85, 94] },
       respiratory_rate: { direction: "high", range: [22, 32] },
@@ -89,7 +116,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "lung_cancer",
     name: "Lung cancer",
-    chiefComplaints: ["persistent cough", "hemoptysis", "weight loss", "shortness of breath"],
+    chiefComplaints: [
+      "persistent cough",
+      "hemoptysis",
+      "weight loss",
+      "shortness of breath",
+    ],
     organSystem: "respiratory",
     severity: "severe",
     keywords: ["lung cancer", "bronchogenic carcinoma", "lung mass"],
@@ -107,13 +139,19 @@ export const diseases: DiseaseDef[] = [
     keywords: ["mesothelioma", "asbestos", "pleural malignancy"],
     patterns: [malignancy, respiratoryDistress],
     overrides: {
-      chest_xray: { value: "Pleural thickening or effusion, possible pleural mass" },
+      chest_xray: {
+        value: "Pleural thickening or effusion, possible pleural mass",
+      },
     },
   },
   {
     id: "cystic_fibrosis",
     name: "Cystic fibrosis",
-    chiefComplaints: ["chronic productive cough", "recurrent chest infections", "failure to thrive"],
+    chiefComplaints: [
+      "chronic productive cough",
+      "recurrent chest infections",
+      "failure to thrive",
+    ],
     organSystem: "respiratory",
     severity: "severe",
     keywords: ["cystic fibrosis", "cf", "mucoviscidosis", "thick mucus"],
@@ -122,4 +160,4 @@ export const diseases: DiseaseDef[] = [
       glucose: { direction: "high", range: [110, 300] },
     },
   },
-];
+]

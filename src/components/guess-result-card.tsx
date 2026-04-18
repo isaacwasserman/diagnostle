@@ -1,10 +1,10 @@
-import type { GuessFeedback } from "@/data/types";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge"
+import type { GuessFeedback } from "@/data/types"
 
 interface Props {
-  guess: string;
-  correct: boolean;
-  feedback: GuessFeedback;
+  guess: string
+  correct: boolean
+  feedback: GuessFeedback
 }
 
 export function GuessResultCard({ guess, correct, feedback }: Props) {
@@ -17,7 +17,7 @@ export function GuessResultCard({ guess, correct, feedback }: Props) {
           <Badge className="text-xs">Correct!</Badge>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -30,20 +30,14 @@ export function GuessResultCard({ guess, correct, feedback }: Props) {
         </Badge>
       </div>
       <div className="flex gap-2 flex-wrap">
-        <FeedbackPill
-          label="Organ System"
-          match={feedback.organSystemMatch}
-        />
-        <FeedbackPill
-          label="Severity"
-          match={feedback.severityMatch}
-        />
+        <FeedbackPill label="Organ System" match={feedback.organSystemMatch} />
+        <FeedbackPill label="Severity" match={feedback.severityMatch} />
         <span className="text-xs text-muted-foreground flex items-center gap-1">
           Shared abnormal tests: <strong>{feedback.sharedAbnormalCount}</strong>
         </span>
       </div>
     </div>
-  );
+  )
 }
 
 function FeedbackPill({ label, match }: { label: string; match: boolean }) {
@@ -57,5 +51,5 @@ function FeedbackPill({ label, match }: { label: string; match: boolean }) {
     >
       {label}: {match ? "Match" : "No match"}
     </span>
-  );
+  )
 }

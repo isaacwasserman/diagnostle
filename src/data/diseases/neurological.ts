@@ -1,17 +1,23 @@
-import type { DiseaseDef } from "../types";
-import {
-  acuteStroke,
-  malignancy,
-} from "../patterns";
+import { acuteStroke, malignancy } from "../patterns"
+import type { DiseaseDef } from "../types"
 
 export const diseases: DiseaseDef[] = [
   {
     id: "ischemic_stroke",
     name: "Stroke (ischemic)",
-    chiefComplaints: ["sudden weakness on one side", "speech difficulty", "facial droop"],
+    chiefComplaints: [
+      "sudden weakness on one side",
+      "speech difficulty",
+      "facial droop",
+    ],
     organSystem: "neurological",
     severity: "critical",
-    keywords: ["stroke", "ischemic stroke", "cerebral infarction", "hemiplegia"],
+    keywords: [
+      "stroke",
+      "ischemic stroke",
+      "cerebral infarction",
+      "hemiplegia",
+    ],
     patterns: [acuteStroke],
     overrides: {
       glucose: { direction: "high", range: [110, 200] },
@@ -20,7 +26,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "transient_ischemic_attack",
     name: "Transient ischemic attack",
-    chiefComplaints: ["temporary weakness on one side", "transient speech difficulty", "visual disturbance"],
+    chiefComplaints: [
+      "temporary weakness on one side",
+      "transient speech difficulty",
+      "visual disturbance",
+    ],
     organSystem: "neurological",
     severity: "moderate",
     keywords: ["tia", "mini stroke", "transient ischemic attack"],
@@ -42,7 +52,9 @@ export const diseases: DiseaseDef[] = [
     keywords: ["epilepsy", "seizure", "convulsion", "tonic-clonic"],
     patterns: [],
     overrides: {
-      neurological_exam: { value: "Post-ictal confusion, possible Todd's paresis" },
+      neurological_exam: {
+        value: "Post-ictal confusion, possible Todd's paresis",
+      },
       lactate: { direction: "high", range: [2.5, 6] },
       ecg: { value: "Normal sinus rhythm, no ST changes" },
       crp: { direction: "high", range: [5, 20] },
@@ -52,27 +64,43 @@ export const diseases: DiseaseDef[] = [
   {
     id: "multiple_sclerosis",
     name: "Multiple sclerosis",
-    chiefComplaints: ["visual disturbance", "limb weakness", "numbness and tingling", "fatigue"],
+    chiefComplaints: [
+      "visual disturbance",
+      "limb weakness",
+      "numbness and tingling",
+      "fatigue",
+    ],
     organSystem: "neurological",
     severity: "moderate",
     keywords: ["ms", "multiple sclerosis", "demyelination", "optic neuritis"],
     patterns: [],
     overrides: {
-      lumbar_puncture: { value: "Oligoclonal bands present, elevated IgG index" },
-      neurological_exam: { value: "Focal neurological deficit, upper motor neuron signs" },
+      lumbar_puncture: {
+        value: "Oligoclonal bands present, elevated IgG index",
+      },
+      neurological_exam: {
+        value: "Focal neurological deficit, upper motor neuron signs",
+      },
       mri_brain: { value: "Multiple periventricular white matter lesions" },
     },
   },
   {
     id: "guillain_barre_syndrome",
     name: "Guillain-Barré syndrome",
-    chiefComplaints: ["ascending weakness", "tingling in hands and feet", "difficulty walking"],
+    chiefComplaints: [
+      "ascending weakness",
+      "tingling in hands and feet",
+      "difficulty walking",
+    ],
     organSystem: "neurological",
     severity: "severe",
     keywords: ["gbs", "guillain barre", "ascending paralysis", "areflexia"],
     patterns: [],
     overrides: {
-      lumbar_puncture: { value: "Elevated protein, normal cell count (albuminocytologic dissociation)" },
+      lumbar_puncture: {
+        value:
+          "Elevated protein, normal cell count (albuminocytologic dissociation)",
+      },
       neurological_exam: { value: "Ascending flaccid weakness, areflexia" },
       respiratory_rate: { direction: "high", range: [22, 30] },
       heart_rate: { direction: "high", range: [100, 130] },
@@ -81,13 +109,21 @@ export const diseases: DiseaseDef[] = [
   {
     id: "parkinsons_disease",
     name: "Parkinson's disease",
-    chiefComplaints: ["tremor", "stiffness", "slow movement", "balance problems"],
+    chiefComplaints: [
+      "tremor",
+      "stiffness",
+      "slow movement",
+      "balance problems",
+    ],
     organSystem: "neurological",
     severity: "moderate",
     keywords: ["parkinson", "tremor", "bradykinesia", "rigidity"],
     patterns: [],
     overrides: {
-      neurological_exam: { value: "Resting tremor, cogwheel rigidity, bradykinesia, shuffling gait" },
+      neurological_exam: {
+        value:
+          "Resting tremor, cogwheel rigidity, bradykinesia, shuffling gait",
+      },
       mri_brain: { value: "Reduced dopaminergic signal in substantia nigra" },
       ecg: { value: "Sinus bradycardia" },
     },
@@ -96,21 +132,36 @@ export const diseases: DiseaseDef[] = [
   {
     id: "motor_neuron_disease",
     name: "Motor neuron disease",
-    chiefComplaints: ["progressive muscle weakness", "muscle wasting", "difficulty swallowing", "slurred speech"],
+    chiefComplaints: [
+      "progressive muscle weakness",
+      "muscle wasting",
+      "difficulty swallowing",
+      "slurred speech",
+    ],
     organSystem: "neurological",
     severity: "severe",
     keywords: ["mnd", "als", "motor neuron", "amyotrophic lateral sclerosis"],
     patterns: [],
     overrides: {
-      neurological_exam: { value: "Upper and lower motor neuron signs, fasciculations" },
+      neurological_exam: {
+        value: "Upper and lower motor neuron signs, fasciculations",
+      },
       creatinine: { direction: "low", range: [0.3, 0.5] },
-      mri_brain: { value: "No structural cause identified, mild corticospinal tract changes" },
+      mri_brain: {
+        value:
+          "No structural cause identified, mild corticospinal tract changes",
+      },
     },
   },
   {
     id: "brain_tumor",
     name: "Brain tumor",
-    chiefComplaints: ["headache", "seizure", "visual disturbance", "personality change"],
+    chiefComplaints: [
+      "headache",
+      "seizure",
+      "visual disturbance",
+      "personality change",
+    ],
     organSystem: "neurological",
     severity: "severe",
     keywords: ["brain tumor", "intracranial neoplasm", "brain mass", "glioma"],
@@ -124,10 +175,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "subarachnoid_hemorrhage",
     name: "Subarachnoid hemorrhage",
-    chiefComplaints: ["sudden severe headache", "thunderclap headache", "neck stiffness", "collapse"],
+    chiefComplaints: [
+      "sudden severe headache",
+      "thunderclap headache",
+      "neck stiffness",
+      "collapse",
+    ],
     organSystem: "neurological",
     severity: "critical",
-    keywords: ["sah", "subarachnoid hemorrhage", "thunderclap headache", "berry aneurysm"],
+    keywords: [
+      "sah",
+      "subarachnoid hemorrhage",
+      "thunderclap headache",
+      "berry aneurysm",
+    ],
     patterns: [acuteStroke],
     overrides: {
       ct_head: { value: "Subarachnoid blood identified" },
@@ -137,15 +198,28 @@ export const diseases: DiseaseDef[] = [
   {
     id: "myasthenia_gravis",
     name: "Myasthenia gravis",
-    chiefComplaints: ["drooping eyelids", "double vision", "muscle fatigue", "difficulty swallowing"],
+    chiefComplaints: [
+      "drooping eyelids",
+      "double vision",
+      "muscle fatigue",
+      "difficulty swallowing",
+    ],
     organSystem: "neurological",
     severity: "moderate",
-    keywords: ["myasthenia gravis", "neuromuscular junction", "ptosis", "anti-achr"],
+    keywords: [
+      "myasthenia gravis",
+      "neuromuscular junction",
+      "ptosis",
+      "anti-achr",
+    ],
     patterns: [],
     overrides: {
-      neurological_exam: { value: "Fatigable weakness, ptosis worsening with sustained upward gaze, diplopia" },
+      neurological_exam: {
+        value:
+          "Fatigable weakness, ptosis worsening with sustained upward gaze, diplopia",
+      },
       chest_xray: { value: "Anterior mediastinal mass — thymic enlargement" },
       respiratory_rate: { direction: "high", range: [20, 28] },
     },
   },
-];
+]

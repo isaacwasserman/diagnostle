@@ -1,19 +1,19 @@
-import { useMemo, useState } from "react";
-import type { DiseaseProfile } from "@/data/types";
+import { useMemo, useState } from "react"
+import { Card } from "@/components/ui/card"
 import {
   Command,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-} from "@/components/ui/command";
-import { Card } from "@/components/ui/card";
+  CommandList,
+} from "@/components/ui/command"
+import type { DiseaseProfile } from "@/data/types"
 
 interface Props {
-  diseases: readonly DiseaseProfile[];
-  onGuess: (diseaseId: string) => void;
-  disabled: boolean;
+  diseases: readonly DiseaseProfile[]
+  onGuess: (diseaseId: string) => void
+  disabled: boolean
 }
 
 const organSystemLabels: Record<string, string> = {
@@ -31,40 +31,40 @@ const organSystemLabels: Record<string, string> = {
   reproductive: "Reproductive",
   respiratory: "Respiratory",
   skin: "Skin",
-};
+}
 
 export function GuessInput({ diseases, onGuess, disabled }: Props) {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("")
 
   const grouped = useMemo(() => {
-    const map = new Map<string, DiseaseProfile[]>();
+    const map = new Map<string, DiseaseProfile[]>()
     for (const d of diseases) {
-      const list = map.get(d.organSystem) ?? [];
-      list.push(d);
-      map.set(d.organSystem, list);
+      const list = map.get(d.organSystem) ?? []
+      list.push(d)
+      map.set(d.organSystem, list)
     }
     // Sort diseases alphabetically within each group
     for (const [, list] of map) {
-      list.sort((a, b) => a.name.localeCompare(b.name));
+      list.sort((a, b) => a.name.localeCompare(b.name))
     }
-    return map;
-  }, [diseases]);
+    return map
+  }, [diseases])
 
   // Sort organ system keys alphabetically by label
   const sortedSystems = useMemo(
     () =>
       [...grouped.keys()].sort((a, b) =>
-        (organSystemLabels[a] ?? a).localeCompare(organSystemLabels[b] ?? b)
+        (organSystemLabels[a] ?? a).localeCompare(organSystemLabels[b] ?? b),
       ),
-    [grouped]
-  );
+    [grouped],
+  )
 
   const sortedAll = useMemo(
     () => [...diseases].sort((a, b) => a.name.localeCompare(b.name)),
-    [diseases]
-  );
+    [diseases],
+  )
 
-  const isSearching = search.trim().length > 0;
+  const isSearching = search.trim().length > 0
 
   return (
     <Card className="overflow-hidden py-1">
@@ -88,9 +88,9 @@ export function GuessInput({ diseases, onGuess, disabled }: Props) {
                 </CommandItem>
               ))
             : sortedSystems.map((system) => {
-                const diseasesInSystem = grouped.get(system);
+                const diseasesInSystem = grouped.get(system)
                 if (!diseasesInSystem || diseasesInSystem.length === 0)
-                  return null;
+                  return null
                 return (
                   <CommandGroup
                     key={system}
@@ -107,10 +107,10 @@ export function GuessInput({ diseases, onGuess, disabled }: Props) {
                       </CommandItem>
                     ))}
                   </CommandGroup>
-                );
+                )
               })}
         </CommandList>
       </Command>
     </Card>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import type { DiseaseProfile } from "@/data/types";
-import { useGame } from "@/hooks/use-game";
-import { ChiefComplaintBanner } from "./chief-complaint-banner";
-import { TurnHistory } from "./turn-history";
-import { ActionPanel } from "./action-panel";
-import { GameOverDialog } from "./game-over-dialog";
+import type { DiseaseProfile } from "@/data/types"
+import { useGame } from "@/hooks/use-game"
+import { ActionPanel } from "./action-panel"
+import { ChiefComplaintBanner } from "./chief-complaint-banner"
+import { GameOverDialog } from "./game-over-dialog"
+import { TurnHistory } from "./turn-history"
 
 interface Props {
-  diseases: readonly DiseaseProfile[];
-  dateStr: string;
+  diseases: readonly DiseaseProfile[]
+  dateStr: string
 }
 
 export function GameBoard({ diseases, dateStr }: Props) {
@@ -18,13 +18,16 @@ export function GameBoard({ diseases, dateStr }: Props) {
     allDiseases,
     handleOrderTest,
     handleGuess,
-  } = useGame(diseases, dateStr);
+  } = useGame(diseases, dateStr)
 
-  const gameOver = state.status !== "playing";
+  const gameOver = state.status !== "playing"
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-4 space-y-4">
-      <ChiefComplaintBanner complaint={state.chiefComplaint} dateStr={dateStr} />
+      <ChiefComplaintBanner
+        complaint={state.chiefComplaint}
+        dateStr={dateStr}
+      />
 
       <div>
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">
@@ -46,7 +49,11 @@ export function GameBoard({ diseases, dateStr }: Props) {
         />
       </div>
 
-      <GameOverDialog state={state} targetDisease={targetDisease} allDiseases={allDiseases} />
+      <GameOverDialog
+        state={state}
+        targetDisease={targetDisease}
+        allDiseases={allDiseases}
+      />
     </div>
-  );
+  )
 }

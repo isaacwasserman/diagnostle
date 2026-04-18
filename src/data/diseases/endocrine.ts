@@ -1,18 +1,28 @@
-import type { DiseaseDef } from "../types";
 import {
+  acuteInflammation,
   hyperglycemia,
   metabolicAcidosis,
-  acuteInflammation,
-} from "../patterns";
+} from "../patterns"
+import type { DiseaseDef } from "../types"
 
 export const diseases: DiseaseDef[] = [
   {
     id: "type_1_diabetes",
     name: "Type 1 diabetes",
-    chiefComplaints: ["excessive thirst", "frequent urination", "weight loss", "fatigue"],
+    chiefComplaints: [
+      "excessive thirst",
+      "frequent urination",
+      "weight loss",
+      "fatigue",
+    ],
     organSystem: "endocrine",
     severity: "moderate",
-    keywords: ["type 1 diabetes", "t1dm", "insulin dependent", "autoimmune diabetes"],
+    keywords: [
+      "type 1 diabetes",
+      "t1dm",
+      "insulin dependent",
+      "autoimmune diabetes",
+    ],
     patterns: [hyperglycemia],
     overrides: {
       urine_dipstick: { value: "Glucose +++, ketones +" },
@@ -21,10 +31,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "type_2_diabetes",
     name: "Type 2 diabetes",
-    chiefComplaints: ["fatigue", "excessive thirst", "frequent urination", "blurred vision"],
+    chiefComplaints: [
+      "fatigue",
+      "excessive thirst",
+      "frequent urination",
+      "blurred vision",
+    ],
     organSystem: "endocrine",
     severity: "moderate",
-    keywords: ["type 2 diabetes", "t2dm", "insulin resistance", "metabolic syndrome"],
+    keywords: [
+      "type 2 diabetes",
+      "t2dm",
+      "insulin resistance",
+      "metabolic syndrome",
+    ],
     patterns: [hyperglycemia],
     overrides: {
       urine_dipstick: { value: "Glucose ++, no ketones" },
@@ -33,10 +53,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "diabetic_ketoacidosis",
     name: "Diabetic ketoacidosis",
-    chiefComplaints: ["nausea and vomiting", "abdominal pain", "confusion", "rapid breathing"],
+    chiefComplaints: [
+      "nausea and vomiting",
+      "abdominal pain",
+      "confusion",
+      "rapid breathing",
+    ],
     organSystem: "endocrine",
     severity: "critical",
-    keywords: ["dka", "ketoacidosis", "diabetic emergency", "kussmaul breathing"],
+    keywords: [
+      "dka",
+      "ketoacidosis",
+      "diabetic emergency",
+      "kussmaul breathing",
+    ],
     patterns: [hyperglycemia, metabolicAcidosis],
     overrides: {
       urine_dipstick: { value: "Glucose +++, ketones +++" },
@@ -46,7 +76,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "hypothyroidism",
     name: "Hypothyroidism",
-    chiefComplaints: ["fatigue", "weight gain", "cold intolerance", "constipation"],
+    chiefComplaints: [
+      "fatigue",
+      "weight gain",
+      "cold intolerance",
+      "constipation",
+    ],
     organSystem: "endocrine",
     severity: "mild",
     keywords: ["hypothyroid", "underactive thyroid", "hashimoto", "myxedema"],
@@ -60,10 +95,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "hyperthyroidism",
     name: "Hyperthyroidism (overactive thyroid)",
-    chiefComplaints: ["weight loss", "palpitations", "heat intolerance", "tremor"],
+    chiefComplaints: [
+      "weight loss",
+      "palpitations",
+      "heat intolerance",
+      "tremor",
+    ],
     organSystem: "endocrine",
     severity: "moderate",
-    keywords: ["hyperthyroid", "overactive thyroid", "graves disease", "thyrotoxicosis"],
+    keywords: [
+      "hyperthyroid",
+      "overactive thyroid",
+      "graves disease",
+      "thyrotoxicosis",
+    ],
     patterns: [],
     overrides: {
       tsh: { direction: "low", range: [0.01, 0.3] },
@@ -74,10 +119,20 @@ export const diseases: DiseaseDef[] = [
   {
     id: "addisons_disease",
     name: "Addison's disease",
-    chiefComplaints: ["fatigue", "weight loss", "dizziness on standing", "skin darkening"],
+    chiefComplaints: [
+      "fatigue",
+      "weight loss",
+      "dizziness on standing",
+      "skin darkening",
+    ],
     organSystem: "endocrine",
     severity: "moderate",
-    keywords: ["addison", "adrenal insufficiency", "hypoadrenalism", "hyperpigmentation"],
+    keywords: [
+      "addison",
+      "adrenal insufficiency",
+      "hypoadrenalism",
+      "hyperpigmentation",
+    ],
     patterns: [],
     overrides: {
       sodium: { direction: "low", range: [120, 134] },
@@ -89,7 +144,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "cushings_syndrome",
     name: "Cushing's syndrome",
-    chiefComplaints: ["weight gain", "moon face", "bruising easily", "muscle weakness"],
+    chiefComplaints: [
+      "weight gain",
+      "moon face",
+      "bruising easily",
+      "muscle weakness",
+    ],
     organSystem: "endocrine",
     severity: "moderate",
     keywords: ["cushing", "cortisol excess", "moon face", "buffalo hump"],
@@ -116,7 +176,12 @@ export const diseases: DiseaseDef[] = [
   {
     id: "pcos",
     name: "Polycystic ovary syndrome (PCOS)",
-    chiefComplaints: ["irregular periods", "weight gain", "acne", "excess hair growth"],
+    chiefComplaints: [
+      "irregular periods",
+      "weight gain",
+      "acne",
+      "excess hair growth",
+    ],
     organSystem: "endocrine",
     severity: "mild",
     keywords: ["pcos", "polycystic ovaries", "anovulation", "hirsutism"],
@@ -124,7 +189,9 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       glucose: { direction: "high", range: [105, 180] },
       hba1c: { direction: "high", range: [5.7, 7.0] },
-      abdominal_ultrasound: { value: "Polycystic ovarian morphology, multiple follicles" },
+      abdominal_ultrasound: {
+        value: "Polycystic ovarian morphology, multiple follicles",
+      },
     },
   },
-];
+]

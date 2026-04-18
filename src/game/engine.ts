@@ -1,61 +1,61 @@
+import { testMap, tests } from "@/data/tests"
 import type {
-  GameState,
-  DiseaseProfile,
-  DiagnosticTest,
-  ResolvedTestResult,
-  GuessFeedback,
-  Turn,
   AbnormalSpec,
-} from "@/data/types";
-import { tests, testMap } from "@/data/tests";
-import { mulberry32, dateSeed } from "./daily";
-import { MAX_TURNS } from "./scoring";
+  DiagnosticTest,
+  DiseaseProfile,
+  GameState,
+  GuessFeedback,
+  ResolvedTestResult,
+  Turn,
+} from "@/data/types"
+import { dateSeed, mulberry32 } from "./daily"
+import { MAX_TURNS } from "./scoring"
 
 // ---- Resolve a test result for a given disease ----
 
 function resolveTestValue(
   abnormal: AbnormalSpec,
-  rng: () => number
+  rng: () => number,
 ): number | string {
-  if ("value" in abnormal) return abnormal.value;
-  const [min, max] = abnormal.range;
-  return +(min + rng() * (max - min)).toFixed(2);
+  if ("value" in abnormal) return abnormal.value
+  const [min, max] = abnormal.range
+  return +(min + rng() * (max - min)).toFixed(2)
 }
 
 function resolveNormalValue(
   test: DiagnosticTest,
-  rng: () => number
+  rng: () => number,
 ): number | string {
-  if (test.resultType === "categorical") return test.normalValue;
-  const { low, high } = test.normalRange;
-  return +(low + rng() * (high - low)).toFixed(2);
+  if (test.resultType === "categorical") return test.normalValue
+  const { low, high } = test.normalRange
+  return +(low + rng() * (high - low)).toFixed(2)
 }
 
 // Hash string to number for sub-seeding
 function hashStr(s: string): number {
-  let h = 0;
+  let h = 0
   for (let i = 0; i < s.length; i++) {
-    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0
   }
-  return h;
+  return h
 }
 
 export function runTest(
   disease: DiseaseProfile,
   testId: string,
-  dateSeedNum: number
+  dateSeedNum: number,
 ): ResolvedTestResult {
-  const test = testMap.get(testId);
-  if (!test) throw new Error(`Unknown test: ${testId}`);
+  const test = testMap.get(testId)
+  if (!test) throw new Error(`Unknown test: ${testId}`)
 
   // Deterministic sub-seed per disease+test combo
-  const subSeed = dateSeedNum ^ hashStr(disease.id + ":" + testId);
-  const rng = mulberry32(subSeed);
+  const subSeed = dateSeedNum ^ hashStr(`${disease.id}:${testId}`)
+  const rng = mulberry32(subSeed)
 
-  const abnormalSpec = disease.abnormals.get(testId);
+  const abnormalSpec = disease.abnormals.get(testId)
 
   if (abnormalSpec) {
-    const value = resolveTestValue(abnormalSpec, rng);
+    const value = resolveTestValue(abnormalSpec, rng)
     return {
       testId,
       testName: test.name,
@@ -63,12 +63,11 @@ export function runTest(
       value,
       unit: test.resultType === "numeric" ? test.unit : undefined,
       abnormal: true,
-      normalRange:
-        test.resultType === "numeric" ? test.normalRange : undefined,
-    };
+      normalRange: test.resultType === "numeric" ? test.normalRange : undefined,
+    }
   }
 
-  const value = resolveNormalValue(test, rng);
+  const value = resolveNormalValue(test, rng)
   return {
     testId,
     testName: test.name,
@@ -76,27 +75,26 @@ export function runTest(
     value,
     unit: test.resultType === "numeric" ? test.unit : undefined,
     abnormal: false,
-    normalRange:
-      test.resultType === "numeric" ? test.normalRange : undefined,
-  };
+    normalRange: test.resultType === "numeric" ? test.normalRange : undefined,
+  }
 }
 
 // ---- Create a new game for a given date ----
 
 export function createGame(
   dateStr: string,
-  allDiseases: readonly DiseaseProfile[]
+  allDiseases: readonly DiseaseProfile[],
 ): GameState {
-  const seed = dateSeed(dateStr);
-  const rng = mulberry32(seed);
+  const seed = dateSeed(dateStr)
+  const rng = mulberry32(seed)
 
   // Pick a disease deterministically
-  const idx = Math.floor(rng() * allDiseases.length);
-  const disease = allDiseases[idx]!;
+  const idx = Math.floor(rng() * allDiseases.length)
+  const disease = allDiseases[idx]!
 
   // Pick a chief complaint
-  const complaintIdx = Math.floor(rng() * disease.chiefComplaints.length);
-  const complaint = disease.chiefComplaints[complaintIdx]!;
+  const complaintIdx = Math.floor(rng() * disease.chiefComplaints.length)
+  const complaint = disease.chiefComplaints[complaintIdx]!
 
   return {
     date: dateStr,
@@ -105,7 +103,7 @@ export function createGame(
     turns: [],
     status: "playing",
     maxTurns: MAX_TURNS,
-  };
+  }
 }
 
 // ---- Process a test order ----
@@ -114,25 +112,24 @@ export function orderTest(
   state: GameState,
   testId: string,
   disease: DiseaseProfile,
-  dateSeedNum: number
+  dateSeedNum: number,
 ): GameState {
-  if (state.status !== "playing") return state;
-  if (state.turns.length >= state.maxTurns) return state;
+  if (state.status !== "playing") return state
+  if (state.turns.length >= state.maxTurns) return state
 
   // Don't allow re-running a test
   const alreadyRun = state.turns.some(
-    (t) => t.type === "test" && t.result.testId === testId
-  );
-  if (alreadyRun) return state;
+    (t) => t.type === "test" && t.result.testId === testId,
+  )
+  if (alreadyRun) return state
 
-  const result = runTest(disease, testId, dateSeedNum);
-  const turn: Turn = { type: "test", result };
+  const result = runTest(disease, testId, dateSeedNum)
+  const turn: Turn = { type: "test", result }
 
-  const newTurns = [...state.turns, turn];
-  const status =
-    newTurns.length >= state.maxTurns ? "lost" : "playing";
+  const newTurns = [...state.turns, turn]
+  const status = newTurns.length >= state.maxTurns ? "lost" : "playing"
 
-  return { ...state, turns: newTurns, status };
+  return { ...state, turns: newTurns, status }
 }
 
 // ---- Process a guess ----
@@ -142,12 +139,12 @@ export function makeGuess(
   guessId: string,
   guessName: string,
   targetDisease: DiseaseProfile,
-  guessedDisease: DiseaseProfile | undefined
+  guessedDisease: DiseaseProfile | undefined,
 ): GameState {
-  if (state.status !== "playing") return state;
-  if (state.turns.length >= state.maxTurns) return state;
+  if (state.status !== "playing") return state
+  if (state.turns.length >= state.maxTurns) return state
 
-  const correct = guessId === targetDisease.id;
+  const correct = guessId === targetDisease.id
 
   const feedback: GuessFeedback = {
     organSystemMatch: guessedDisease
@@ -159,36 +156,33 @@ export function makeGuess(
     sharedAbnormalCount: guessedDisease
       ? countSharedAbnormals(guessedDisease, targetDisease)
       : 0,
-  };
+  }
 
   const turn: Turn = {
     type: "guess",
     guess: guessName,
     correct,
     feedback,
-  };
-
-  const newTurns = [...state.turns, turn];
-
-  let status: GameState["status"] = state.status;
-  if (correct) {
-    status = "won";
-  } else if (newTurns.length >= state.maxTurns) {
-    status = "lost";
   }
 
-  return { ...state, turns: newTurns, status };
+  const newTurns = [...state.turns, turn]
+
+  let status: GameState["status"] = state.status
+  if (correct) {
+    status = "won"
+  } else if (newTurns.length >= state.maxTurns) {
+    status = "lost"
+  }
+
+  return { ...state, turns: newTurns, status }
 }
 
-function countSharedAbnormals(
-  a: DiseaseProfile,
-  b: DiseaseProfile
-): number {
-  let count = 0;
+function countSharedAbnormals(a: DiseaseProfile, b: DiseaseProfile): number {
+  let count = 0
   for (const key of a.abnormals.keys()) {
-    if (b.abnormals.has(key)) count++;
+    if (b.abnormals.has(key)) count++
   }
-  return count;
+  return count
 }
 
 // ---- Get tests not yet run ----
@@ -197,7 +191,7 @@ export function getAvailableTests(state: GameState) {
   const runTestIds = new Set(
     state.turns
       .filter((t): t is Extract<Turn, { type: "test" }> => t.type === "test")
-      .map((t) => t.result.testId)
-  );
-  return tests.filter((t) => !runTestIds.has(t.id));
+      .map((t) => t.result.testId),
+  )
+  return tests.filter((t) => !runTestIds.has(t.id))
 }

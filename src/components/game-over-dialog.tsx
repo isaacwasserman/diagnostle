@@ -1,35 +1,35 @@
-import { useState } from "react";
-import { toast } from "sonner";
-import type { GameState, DiseaseProfile } from "@/data/types";
-import {
-  getNarrowingSequence,
-  narrowingEmojiLine,
-  narrowingShareText,
-} from "@/game/narrowing";
+import { useState } from "react"
+import { toast } from "sonner"
+import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/components/ui/dialog"
+import type { DiseaseProfile, GameState } from "@/data/types"
+import {
+  getNarrowingSequence,
+  narrowingEmojiLine,
+  narrowingShareText,
+} from "@/game/narrowing"
 
 interface Props {
-  state: GameState;
-  targetDisease: DiseaseProfile;
-  allDiseases: readonly DiseaseProfile[];
+  state: GameState
+  targetDisease: DiseaseProfile
+  allDiseases: readonly DiseaseProfile[]
 }
 
 export function GameOverDialog({ state, targetDisease, allDiseases }: Props) {
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(false)
   const isOpen =
-    !dismissed && (state.status === "won" || state.status === "lost");
-  const won = state.status === "won";
+    !dismissed && (state.status === "won" || state.status === "lost")
+  const won = state.status === "won"
 
-  const total = allDiseases.length;
-  const sequence = getNarrowingSequence(state.turns, allDiseases);
+  const total = allDiseases.length
+  const sequence = getNarrowingSequence(state.turns, allDiseases)
 
-  const emojiLines = sequence.map((s) => narrowingEmojiLine(s, total));
+  const emojiLines = sequence.map((s) => narrowingEmojiLine(s, total))
 
   const shareText = [
     `Diagnostle — ${state.date}`,
@@ -38,18 +38,18 @@ export function GameOverDialog({ state, targetDisease, allDiseases }: Props) {
       : `❌ Failed to diagnose`,
     "",
     narrowingShareText(state.turns, allDiseases),
-  ].join("\n");
+  ].join("\n")
 
   const handleShare = () => {
-    navigator.clipboard.writeText(shareText);
-    toast.success("Copied to clipboard");
-  };
+    navigator.clipboard.writeText(shareText)
+    toast.success("Copied to clipboard")
+  }
 
   return (
     <Dialog
       open={isOpen}
       onOpenChange={(open) => {
-        if (!open) setDismissed(true);
+        if (!open) setDismissed(true)
       }}
     >
       <DialogContent className="sm:max-w-sm gap-0">
@@ -88,7 +88,7 @@ export function GameOverDialog({ state, targetDisease, allDiseases }: Props) {
 
           <div className="flex justify-center">
             <pre className="text-sm leading-loose whitespace-pre select-all">
-{emojiLines.join("\n")}
+              {emojiLines.join("\n")}
             </pre>
           </div>
         </div>
@@ -100,5 +100,5 @@ export function GameOverDialog({ state, targetDisease, allDiseases }: Props) {
         </div>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

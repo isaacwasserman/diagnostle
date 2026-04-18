@@ -1,12 +1,12 @@
-import type { DiseaseDef } from "../types";
 import {
   acuteInflammation,
-  hepatocellularDamage,
   cholestatic,
-  chronicLiver,
   chronicInflammation,
+  chronicLiver,
+  hepatocellularDamage,
   malignancy,
-} from "../patterns";
+} from "../patterns"
+import type { DiseaseDef } from "../types"
 
 export const diseases: DiseaseDef[] = [
   // ---- Acute Surgical ----
@@ -21,7 +21,9 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       temperature: { direction: "high", range: [37.8, 39.0] },
       heart_rate: { direction: "high", range: [90, 110] },
-      ct_abdomen: { value: "Inflamed appendix with periappendiceal fat stranding" },
+      ct_abdomen: {
+        value: "Inflamed appendix with periappendiceal fat stranding",
+      },
       abdominal_exam: { value: "RLQ tenderness, rebound, guarding" },
     },
   },
@@ -38,8 +40,13 @@ export const diseases: DiseaseDef[] = [
       potassium: { direction: "low", range: [2.8, 3.4] },
       sodium: { direction: "low", range: [128, 135] },
       lactate: { direction: "high", range: [2.0, 5.0] },
-      ct_abdomen: { value: "Dilated loops of bowel with transition point, air-fluid levels" },
-      abdominal_exam: { value: "Distended, tympanic, diffuse tenderness, high-pitched bowel sounds" },
+      ct_abdomen: {
+        value: "Dilated loops of bowel with transition point, air-fluid levels",
+      },
+      abdominal_exam: {
+        value:
+          "Distended, tympanic, diffuse tenderness, high-pitched bowel sounds",
+      },
     },
   },
 
@@ -55,7 +62,10 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       hemoglobin: { direction: "low", range: [9.0, 11.5] },
       platelets: { direction: "high", range: [400, 600] },
-      ct_abdomen: { value: "Terminal ileal wall thickening with skip lesions and mesenteric fat creeping" },
+      ct_abdomen: {
+        value:
+          "Terminal ileal wall thickening with skip lesions and mesenteric fat creeping",
+      },
       abdominal_exam: { value: "RLQ tenderness, possible palpable mass" },
     },
   },
@@ -70,8 +80,13 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       hemoglobin: { direction: "low", range: [8.5, 11.0] },
       platelets: { direction: "high", range: [400, 650] },
-      ct_abdomen: { value: "Continuous colonic wall thickening extending from rectum, loss of haustral pattern" },
-      abdominal_exam: { value: "Left-sided abdominal tenderness, hyperactive bowel sounds" },
+      ct_abdomen: {
+        value:
+          "Continuous colonic wall thickening extending from rectum, loss of haustral pattern",
+      },
+      abdominal_exam: {
+        value: "Left-sided abdominal tenderness, hyperactive bowel sounds",
+      },
     },
   },
 
@@ -88,7 +103,9 @@ export const diseases: DiseaseDef[] = [
       hemoglobin: { direction: "low", range: [9.0, 11.5] },
       mcv: { direction: "low", range: [65, 78] },
       calcium: { direction: "low", range: [7.0, 8.4] },
-      abdominal_exam: { value: "Mild diffuse abdominal distension, no organomegaly" },
+      abdominal_exam: {
+        value: "Mild diffuse abdominal distension, no organomegaly",
+      },
     },
     remove: ["esr"],
   },
@@ -97,7 +114,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "acute_pancreatitis",
     name: "Acute Pancreatitis",
-    chiefComplaints: ["severe epigastric pain", "nausea and vomiting", "abdominal pain radiating to back"],
+    chiefComplaints: [
+      "severe epigastric pain",
+      "nausea and vomiting",
+      "abdominal pain radiating to back",
+    ],
     organSystem: "gastrointestinal",
     severity: "severe",
     keywords: ["pancreatitis", "acute pancreatitis", "pancreas"],
@@ -108,14 +129,23 @@ export const diseases: DiseaseDef[] = [
       glucose: { direction: "high", range: [140, 300] },
       calcium: { direction: "low", range: [6.5, 8.0] },
       lactate: { direction: "high", range: [2.0, 4.5] },
-      ct_abdomen: { value: "Enlarged, edematous pancreas with peripancreatic fluid and fat stranding" },
-      abdominal_exam: { value: "Epigastric tenderness with guarding, reduced bowel sounds" },
+      ct_abdomen: {
+        value:
+          "Enlarged, edematous pancreas with peripancreatic fluid and fat stranding",
+      },
+      abdominal_exam: {
+        value: "Epigastric tenderness with guarding, reduced bowel sounds",
+      },
     },
   },
   {
     id: "chronic_pancreatitis",
     name: "Chronic Pancreatitis",
-    chiefComplaints: ["recurrent epigastric pain", "weight loss", "steatorrhea"],
+    chiefComplaints: [
+      "recurrent epigastric pain",
+      "weight loss",
+      "steatorrhea",
+    ],
     organSystem: "gastrointestinal",
     severity: "moderate",
     keywords: ["chronic pancreatitis", "pancreatic insufficiency"],
@@ -123,7 +153,10 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       glucose: { direction: "high", range: [110, 250] },
       hba1c: { direction: "high", range: [6.0, 9.0] },
-      ct_abdomen: { value: "Pancreatic calcifications, ductal dilatation, parenchymal atrophy" },
+      ct_abdomen: {
+        value:
+          "Pancreatic calcifications, ductal dilatation, parenchymal atrophy",
+      },
       abdominal_exam: { value: "Epigastric tenderness, no peritonism" },
     },
   },
@@ -132,7 +165,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "acute_cholecystitis",
     name: "Acute Cholecystitis",
-    chiefComplaints: ["right upper quadrant pain", "fever", "nausea and vomiting"],
+    chiefComplaints: [
+      "right upper quadrant pain",
+      "fever",
+      "nausea and vomiting",
+    ],
     organSystem: "gastrointestinal",
     severity: "severe",
     keywords: ["cholecystitis", "gallbladder inflammation"],
@@ -140,20 +177,32 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       temperature: { direction: "high", range: [38.0, 39.5] },
       heart_rate: { direction: "high", range: [95, 115] },
-      abdominal_ultrasound: { value: "Gallbladder wall thickening, pericholecystic fluid, positive sonographic Murphy's sign" },
-      abdominal_exam: { value: "RUQ tenderness, positive Murphy's sign, guarding" },
+      abdominal_ultrasound: {
+        value:
+          "Gallbladder wall thickening, pericholecystic fluid, positive sonographic Murphy's sign",
+      },
+      abdominal_exam: {
+        value: "RUQ tenderness, positive Murphy's sign, guarding",
+      },
     },
   },
   {
     id: "gallstones",
     name: "Gallstones",
-    chiefComplaints: ["right upper quadrant pain", "nausea", "pain after fatty meals"],
+    chiefComplaints: [
+      "right upper quadrant pain",
+      "nausea",
+      "pain after fatty meals",
+    ],
     organSystem: "gastrointestinal",
     severity: "moderate",
     keywords: ["gallstones", "cholelithiasis", "biliary colic"],
     patterns: [cholestatic],
     overrides: {
-      abdominal_ultrasound: { value: "Multiple gallstones with acoustic shadowing, no gallbladder wall thickening" },
+      abdominal_ultrasound: {
+        value:
+          "Multiple gallstones with acoustic shadowing, no gallbladder wall thickening",
+      },
       abdominal_exam: { value: "RUQ tenderness, no peritonism" },
     },
   },
@@ -170,8 +219,13 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       sodium: { direction: "low", range: [125, 134] },
       creatinine: { direction: "high", range: [1.3, 2.5] },
-      abdominal_ultrasound: { value: "Shrunken nodular liver, splenomegaly, ascites" },
-      abdominal_exam: { value: "Distended abdomen with shifting dullness, hepatomegaly, spider nevi" },
+      abdominal_ultrasound: {
+        value: "Shrunken nodular liver, splenomegaly, ascites",
+      },
+      abdominal_exam: {
+        value:
+          "Distended abdomen with shifting dullness, hepatomegaly, spider nevi",
+      },
     },
   },
   {
@@ -180,21 +234,34 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["fatigue", "right upper quadrant pain", "jaundice"],
     organSystem: "gastrointestinal",
     severity: "severe",
-    keywords: ["alcoholic liver disease", "alcoholic hepatitis", "alcohol liver"],
+    keywords: [
+      "alcoholic liver disease",
+      "alcoholic hepatitis",
+      "alcohol liver",
+    ],
     patterns: [hepatocellularDamage],
     overrides: {
       ast: { direction: "high", range: [100, 500] },
       alt: { direction: "high", range: [60, 250] },
       mcv: { direction: "high", range: [100, 115] },
       platelets: { direction: "low", range: [80, 140] },
-      abdominal_ultrasound: { value: "Hepatomegaly with diffuse increased echogenicity, possible ascites" },
-      abdominal_exam: { value: "Hepatomegaly, RUQ tenderness, jaundice, spider nevi" },
+      abdominal_ultrasound: {
+        value:
+          "Hepatomegaly with diffuse increased echogenicity, possible ascites",
+      },
+      abdominal_exam: {
+        value: "Hepatomegaly, RUQ tenderness, jaundice, spider nevi",
+      },
     },
   },
   {
     id: "nafld",
     name: "Non-alcoholic Fatty Liver Disease (NAFLD)",
-    chiefComplaints: ["fatigue", "right upper quadrant discomfort", "incidental finding"],
+    chiefComplaints: [
+      "fatigue",
+      "right upper quadrant discomfort",
+      "incidental finding",
+    ],
     organSystem: "gastrointestinal",
     severity: "mild",
     keywords: ["nafld", "fatty liver", "non-alcoholic fatty liver", "nash"],
@@ -205,7 +272,10 @@ export const diseases: DiseaseDef[] = [
       glucose: { direction: "high", range: [100, 140] },
       hba1c: { direction: "high", range: [5.7, 7.0] },
       bilirubin: { direction: "high", range: [1.0, 2.0] },
-      abdominal_ultrasound: { value: "Diffuse hepatic steatosis, increased echogenicity of liver parenchyma" },
+      abdominal_ultrasound: {
+        value:
+          "Diffuse hepatic steatosis, increased echogenicity of liver parenchyma",
+      },
       abdominal_exam: { value: "Mild hepatomegaly, otherwise unremarkable" },
     },
   },
@@ -214,15 +284,29 @@ export const diseases: DiseaseDef[] = [
   {
     id: "bowel_cancer",
     name: "Bowel Cancer",
-    chiefComplaints: ["change in bowel habit", "rectal bleeding", "weight loss"],
+    chiefComplaints: [
+      "change in bowel habit",
+      "rectal bleeding",
+      "weight loss",
+    ],
     organSystem: "gastrointestinal",
     severity: "severe",
-    keywords: ["bowel cancer", "colorectal cancer", "colon cancer", "rectal cancer"],
+    keywords: [
+      "bowel cancer",
+      "colorectal cancer",
+      "colon cancer",
+      "rectal cancer",
+    ],
     patterns: [malignancy],
     overrides: {
       mcv: { direction: "low", range: [65, 78] },
-      ct_abdomen: { value: "Colonic mass with luminal narrowing and regional lymphadenopathy" },
-      abdominal_exam: { value: "Palpable abdominal mass, possible hepatomegaly" },
+      ct_abdomen: {
+        value:
+          "Colonic mass with luminal narrowing and regional lymphadenopathy",
+      },
+      abdominal_exam: {
+        value: "Palpable abdominal mass, possible hepatomegaly",
+      },
     },
   },
   {
@@ -235,8 +319,13 @@ export const diseases: DiseaseDef[] = [
     patterns: [malignancy],
     overrides: {
       alt: { direction: "high", range: [45, 100] },
-      ct_abdomen: { value: "Gastric wall thickening with perigastric lymphadenopathy" },
-      abdominal_exam: { value: "Epigastric mass, possible left supraclavicular lymphadenopathy (Virchow's node)" },
+      ct_abdomen: {
+        value: "Gastric wall thickening with perigastric lymphadenopathy",
+      },
+      abdominal_exam: {
+        value:
+          "Epigastric mass, possible left supraclavicular lymphadenopathy (Virchow's node)",
+      },
     },
   },
   {
@@ -245,12 +334,23 @@ export const diseases: DiseaseDef[] = [
     chiefComplaints: ["progressive dysphagia", "weight loss", "odynophagia"],
     organSystem: "gastrointestinal",
     severity: "severe",
-    keywords: ["esophageal cancer", "esophageal cancer", "esophageal carcinoma"],
+    keywords: [
+      "esophageal cancer",
+      "esophageal cancer",
+      "esophageal carcinoma",
+    ],
     patterns: [malignancy],
     overrides: {
-      ct_abdomen: { value: "Esophageal wall thickening with para-esophageal lymphadenopathy" },
-      abdominal_exam: { value: "Cachexia, possible epigastric tenderness, no palpable mass" },
-      chest_xray: { value: "Widened mediastinum, possible retrocardiac soft tissue density" },
+      ct_abdomen: {
+        value:
+          "Esophageal wall thickening with para-esophageal lymphadenopathy",
+      },
+      abdominal_exam: {
+        value: "Cachexia, possible epigastric tenderness, no palpable mass",
+      },
+      chest_xray: {
+        value: "Widened mediastinum, possible retrocardiac soft tissue density",
+      },
     },
   },
 
@@ -268,7 +368,9 @@ export const diseases: DiseaseDef[] = [
       hematocrit: { direction: "low", range: [24, 35] },
       bun: { direction: "high", range: [22, 40] },
       abdominal_exam: { value: "Epigastric tenderness, no peritonism" },
-      ct_abdomen: { value: "Gastric wall thickening with possible crater-like ulceration" },
+      ct_abdomen: {
+        value: "Gastric wall thickening with possible crater-like ulceration",
+      },
     },
     remove: ["esr"],
   },
@@ -293,7 +395,11 @@ export const diseases: DiseaseDef[] = [
   {
     id: "diverticulitis",
     name: "Diverticulitis",
-    chiefComplaints: ["left lower abdominal pain", "fever", "change in bowel habit"],
+    chiefComplaints: [
+      "left lower abdominal pain",
+      "fever",
+      "change in bowel habit",
+    ],
     organSystem: "gastrointestinal",
     severity: "moderate",
     keywords: ["diverticulitis", "diverticular disease"],
@@ -301,8 +407,11 @@ export const diseases: DiseaseDef[] = [
     overrides: {
       temperature: { direction: "high", range: [37.8, 39.0] },
       heart_rate: { direction: "high", range: [90, 110] },
-      ct_abdomen: { value: "Sigmoid diverticulosis with pericolonic fat stranding and localized wall thickening" },
+      ct_abdomen: {
+        value:
+          "Sigmoid diverticulosis with pericolonic fat stranding and localized wall thickening",
+      },
       abdominal_exam: { value: "LLQ tenderness with localized guarding" },
     },
   },
-];
+]
